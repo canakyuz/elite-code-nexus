@@ -97,72 +97,42 @@ const FractalGeometry = ({ position }: { position: [number, number, number] }) =
 
 const WaveGrid = () => {
   const gridRef = useRef<THREE.Group>(null);
-  const lineRefs = useRef<THREE.Line[]>([]);
+  const meshRef = useRef<THREE.Mesh>(null);
   
-  const lines = useMemo(() => {
-    const lineGeometries = [];
+  const geometry = useMemo(() => {
     const gridSize = 20;
     const spacing = 0.2;
+    const geometry = new THREE.PlaneGeometry(gridSize * spacing, gridSize * spacing, gridSize - 1, gridSize - 1);
     
-    // Create grid lines
-    for (let i = 0; i < gridSize; i++) {
-      const points1 = [];
-      const points2 = [];
-      
-      for (let j = 0; j < gridSize; j++) {
-        const x1 = (i - gridSize/2) * spacing;
-        const z1 = (j - gridSize/2) * spacing;
-        const y1 = Math.sin(x1 * 3) * Math.cos(z1 * 3) * 0.1;
-        
-        const x2 = (j - gridSize/2) * spacing;
-        const z2 = (i - gridSize/2) * spacing;
-        const y2 = Math.sin(x2 * 3) * Math.cos(z2 * 3) * 0.1;
-        
-        points1.push(new THREE.Vector3(x1, y1, z1));
-        points2.push(new THREE.Vector3(x2, y2, z2));
-      }
-      
-      lineGeometries.push(
-        new THREE.BufferGeometry().setFromPoints(points1),
-        new THREE.BufferGeometry().setFromPoints(points2)
-      );
-    }
-    
-    return lineGeometries;
+    return geometry;
   }, []);
   
   useFrame((state) => {
+    if (meshRef.current && meshRef.current.geometry) {
+      const positions = meshRef.current.geometry.attributes.position;
+      const array = positions.array as Float32Array;
+      
+      for (let i = 0; i < positions.count; i++) {
+        const x = array[i * 3];
+        const z = array[i * 3 + 2];
+        const wave = Math.sin(x * 5 + state.clock.elapsedTime) * 
+                    Math.cos(z * 5 + state.clock.elapsedTime) * 0.05;
+        array[i * 3 + 1] = wave;
+      }
+      positions.needsUpdate = true;
+    }
+    
     if (gridRef.current) {
       gridRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
       gridRef.current.position.z = -3;
-      
-      // Animate wave effect
-      lineRefs.current.forEach((line, index) => {
-        if (line && line.geometry) {
-          const positions = line.geometry.attributes.position;
-          if (positions) {
-            for (let i = 0; i < positions.count; i++) {
-              const x = positions.getX(i);
-              const z = positions.getZ(i);
-              const wave = Math.sin(x * 5 + state.clock.elapsedTime) * 
-                          Math.cos(z * 5 + state.clock.elapsedTime) * 0.05;
-              positions.setY(i, wave);
-            }
-            positions.needsUpdate = true;
-          }
-        }
-      });
     }
   });
   
   return (
     <group ref={gridRef}>
-      {lines.map((geometry, index) => (
-        <line key={index} ref={(el) => el && (lineRefs.current[index] = el)}>
-          <bufferGeometry attach="geometry" {...geometry} />
-          <lineBasicMaterial color="#000000" transparent opacity={0.2} />
-        </line>
-      ))}
+      <mesh ref={meshRef} geometry={geometry}>
+        <meshBasicMaterial wireframe color="#000000" transparent opacity={0.2} />
+      </mesh>
     </group>
   );
 };
