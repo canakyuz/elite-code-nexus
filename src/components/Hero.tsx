@@ -1,80 +1,54 @@
 
 const Hero = () => {
   return (
-    <section className="min-h-screen px-6 bg-black text-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-12 h-full">
-            {Array.from({ length: 48 }).map((_, i) => (
-              <div key={i} className="border-r border-gray-800 h-full"></div>
-            ))}
-          </div>
+    <section className="min-h-screen px-6 bg-white relative overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Subtle geometric background */}
+        <div className="absolute top-20 right-10 w-96 h-96 opacity-5">
+          <div className="w-full h-full border-2 border-black transform rotate-45"></div>
         </div>
         
-        <div className="relative z-10 pt-32 pb-20">
-          {/* Top section */}
-          <div className="flex justify-between items-start mb-20">
-            <div className="space-y-2">
-              <div className="text-sm font-mono text-gray-400">001</div>
-              <div className="text-sm font-mono text-gray-400">INTRO</div>
-            </div>
-            <div className="text-right space-y-1">
-              <div className="text-sm font-mono text-gray-400">AVAILABLE FOR WORK</div>
-              <div className="w-2 h-2 bg-green-400 rounded-full ml-auto animate-pulse"></div>
-            </div>
-          </div>
-
+        <div className="relative z-10 pt-40 pb-20">
           {/* Main content */}
           <div className="space-y-16">
-            <div>
-              <h1 className="text-7xl md:text-9xl font-bold leading-none tracking-tight mb-4">
-                CAN
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                  AKYÜZ
-                </span>
-              </h1>
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-                <div className="max-w-md">
-                  <p className="text-xl text-gray-300 leading-relaxed">
-                    Senior Software Engineer & Tech Entrepreneur crafting digital experiences 
-                    that matter.
-                  </p>
+            {/* Name and title */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="text-sm font-mono text-gray-400 uppercase tracking-[0.2em]">
+                  SOFTWARE ENGINEER
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-px h-16 bg-gradient-to-b from-transparent via-blue-400 to-transparent"></div>
-                  <div className="text-sm font-mono text-gray-400">
-                    SCROLL TO EXPLORE
-                  </div>
-                </div>
+                <h1 className="text-8xl md:text-9xl font-light leading-none tracking-tight text-black">
+                  CAN
+                  <br />
+                  <span className="font-mono text-7xl md:text-8xl">AKYÜZ</span>
+                </h1>
+              </div>
+              
+              <div className="max-w-lg space-y-6">
+                <div className="w-16 h-px bg-black"></div>
+                <p className="text-xl font-light text-gray-600 leading-relaxed">
+                  Senior software engineer and entrepreneur creating 
+                  digital experiences that matter.
+                </p>
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 pt-16 border-t border-gray-800">
+            {/* Status and location */}
+            <div className="flex items-start justify-between pt-20 border-t border-gray-200">
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-blue-400">10+</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Years</div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm font-mono text-gray-500 uppercase tracking-wider">
+                    Available for projects
+                  </span>
+                </div>
               </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-purple-400">150+</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Projects</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-green-400">5</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Companies</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-yellow-400">1M+</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Users</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-red-400">24/7</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Uptime</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-cyan-400">∞</div>
-                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider">Learning</div>
+              
+              <div className="text-right space-y-1">
+                <div className="text-sm font-mono text-gray-500 uppercase tracking-wider">
+                  Istanbul, Turkey
+                </div>
+                <div className="text-xs text-gray-400">UTC+3</div>
               </div>
             </div>
           </div>
