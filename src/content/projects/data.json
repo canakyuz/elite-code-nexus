@@ -1,0 +1,31 @@
+
+{
+  "sectionNumber": "03",
+  "title": "Selected Work",
+  "projects": [
+    {
+      "title": "E-Commerce Platform",
+      "year": "2024",
+      "description": "Microservice architecture serving 100K+ daily users with modern e-commerce solutions.",
+      "technologies": ["React", "Node.js", "PostgreSQL", "AWS"]
+    },
+    {
+      "title": "FinTech Mobile App",
+      "year": "2023", 
+      "description": "Secure payment system and portfolio management using blockchain technology.",
+      "technologies": ["React Native", "Python", "Blockchain"]
+    },
+    {
+      "title": "AI SaaS Platform",
+      "year": "2023",
+      "description": "AI-powered platform automating business processes and increasing efficiency by 300%.",
+      "technologies": ["Next.js", "Python", "TensorFlow"]
+    },
+    {
+      "title": "Developer Tools Suite",
+      "year": "2022",
+      "description": "Open-source tools package simplifying developers' work. 10K+ stars on GitHub.",
+      "technologies": ["TypeScript", "Node.js", "CLI"]
+    }
+  ]
+}

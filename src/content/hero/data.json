@@ -1,0 +1,17 @@
+
+{
+  "title": {
+    "firstName": "CAN",
+    "lastName": "AKYÜZ"
+  },
+  "subtitle": "SOFTWARE ENGINEER",
+  "description": "Senior software engineer and entrepreneur creating digital experiences that matter.",
+  "status": {
+    "text": "Available for projects",
+    "available": true
+  },
+  "location": {
+    "city": "Istanbul, Turkey",
+    "timezone": "UTC+3"
+  }
+}

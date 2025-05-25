@@ -1,0 +1,42 @@
+
+{
+  "sectionNumber": "04",
+  "title": "Contact",
+  "description": "Let's work together on new projects and collaboration opportunities. I respond to every message within 24 hours.",
+  "contactInfo": [
+    {
+      "label": "Email",
+      "value": "hello@canakyuz.dev",
+      "href": "mailto:hello@canakyuz.dev"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/canakyuz",
+      "href": "#"
+    }
+  ],
+  "form": {
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "placeholder": "Name",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "placeholder": "Email",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "textarea",
+        "placeholder": "Message",
+        "required": true,
+        "rows": 4
+      }
+    ],
+    "submitText": "Send Message"
+  }
+}

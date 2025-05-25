@@ -1,0 +1,23 @@
+
+{
+  "sectionNumber": "02",
+  "title": "Skills",
+  "categories": [
+    {
+      "title": "Frontend",
+      "skills": ["React", "Next.js", "TypeScript", "Vue.js", "Tailwind CSS"]
+    },
+    {
+      "title": "Backend", 
+      "skills": ["Node.js", "Python", "Go", "PostgreSQL", "MongoDB"]
+    },
+    {
+      "title": "DevOps",
+      "skills": ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"]
+    },
+    {
+      "title": "Mobile",
+      "skills": ["React Native", "Flutter", "iOS", "Android"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+
+{
+  "sectionNumber": "01",
+  "title": "About",
+  "mainDescription": "I'm a senior software engineer and entrepreneur with over 10 years of experience building innovative digital solutions.",
+  "detailedDescription": [
+    "Since 2014, I've been exploring the power of technology, learning something new every day, and transforming complex problems into elegant solutions.",
+    "I've founded 5 different technology companies, touching the lives of millions of users and gaining deep experience in both technical and business development."
+  ],
+  "highlights": [
+    {
+      "number": "10+",
+      "label": "Years Experience"
+    },
+    {
+      "number": "5",
+      "label": "Companies Founded"
+    },
+    {
+      "number": "1M+",
+      "label": "Users Impacted"
+    }
+  ]
+}

@@ -1,32 +1,7 @@
 
-const Projects = () => {
-  const projects = [
-    {
-      title: "E-Commerce Platform",
-      year: "2024",
-      description: "Microservice architecture serving 100K+ daily users with modern e-commerce solutions.",
-      technologies: ["React", "Node.js", "PostgreSQL", "AWS"],
-    },
-    {
-      title: "FinTech Mobile App",
-      year: "2023", 
-      description: "Secure payment system and portfolio management using blockchain technology.",
-      technologies: ["React Native", "Python", "Blockchain"],
-    },
-    {
-      title: "AI SaaS Platform",
-      year: "2023",
-      description: "AI-powered platform automating business processes and increasing efficiency by 300%.",
-      technologies: ["Next.js", "Python", "TensorFlow"],
-    },
-    {
-      title: "Developer Tools Suite",
-      year: "2022",
-      description: "Open-source tools package simplifying developers' work. 10K+ stars on GitHub.",
-      technologies: ["TypeScript", "Node.js", "CLI"],
-    }
-  ];
+import projectsData from "@/content/projects/data.json";
 
+const Projects = () => {
   return (
     <section id="work" className="py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -34,14 +9,14 @@ const Projects = () => {
           {/* Left column */}
           <div className="lg:col-span-3">
             <div className="space-y-4">
-              <div className="text-8xl font-light text-gray-200">03</div>
-              <h2 className="text-3xl font-light text-black">Selected Work</h2>
+              <div className="text-8xl font-light text-gray-200">{projectsData.sectionNumber}</div>
+              <h2 className="text-3xl font-light text-black">{projectsData.title}</h2>
             </div>
           </div>
 
           {/* Right column */}
           <div className="lg:col-span-9 space-y-16">
-            {projects.map((project, index) => (
+            {projectsData.projects.map((project, index) => (
               <div key={index} className="group cursor-pointer">
                 <div className="space-y-6 py-8 border-b border-gray-200 hover:border-black transition-colors">
                   <div className="flex items-start justify-between">
