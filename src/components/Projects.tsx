@@ -3,76 +3,64 @@ const Projects = () => {
   const projects = [
     {
       title: "E-Ticaret Platformu",
-      description: "Mikroservis mimarisi ile geliştirilmiş, günlük 100K+ kullanıcıya hizmet veren modern e-ticaret platformu.",
-      technologies: ["React", "Node.js", "PostgreSQL", "AWS"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-      link: "#"
+      category: "Full Stack Development",
+      technologies: ["React", "Node.js", "PostgreSQL"],
+      description: "Mikroservis mimarisi ile geliştirilmiş modern e-ticaret çözümü."
     },
     {
-      title: "Fintech Mobil Uygulaması", 
-      description: "Blockchain teknolojisi ile entegre, güvenli ödeme sistemi ve portföy yönetimi sunan mobil uygulama.",
-      technologies: ["React Native", "Python", "MongoDB", "Blockchain"],
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop",
-      link: "#"
+      title: "Fintech Uygulaması", 
+      category: "Mobile Development",
+      technologies: ["React Native", "Python", "Blockchain"],
+      description: "Güvenli ödeme sistemi ve portföy yönetimi sunan mobil platform."
     },
     {
-      title: "AI Destekli SaaS Platformu",
-      description: "Makine öğrenmesi algoritmaları ile iş süreçlerini otomatikleştiren B2B SaaS çözümü.",
-      technologies: ["Next.js", "Python", "TensorFlow", "Docker"],
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
-      link: "#"
+      title: "AI SaaS Platformu",
+      category: "AI/ML Development",
+      technologies: ["Next.js", "Python", "TensorFlow"],
+      description: "İş süreçlerini otomatikleştiren yapay zeka destekli platform."
     }
   ];
 
   return (
-    <section id="projects" className="py-20 px-6 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-            Öne Çıkan Projeler
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Milyonlarca kullanıcıyı etkileyen, inovatif teknoloji çözümleri.
+    <section id="projects" className="py-24 px-6 bg-gray-50">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-16">
+          <p className="text-sm uppercase tracking-widest text-gray-500 font-light mb-4">
+            03 — Öne Çıkan Projeler
           </p>
+          <h2 className="text-4xl font-light text-gray-900">
+            Seçilmiş Çalışmalar
+          </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="space-y-16">
           {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="aspect-video bg-gray-200">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-medium text-gray-900 mb-3">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className="px-3 py-1 bg-blue-50 text-blue-600 rounded text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+            <div key={index} className="group">
+              <div className="grid md:grid-cols-3 gap-8 pb-8 border-b border-gray-200">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+                    {project.category}
+                  </p>
+                  <h3 className="text-xl font-light text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {project.title}
+                  </h3>
                 </div>
                 
-                <a 
-                  href={project.link}
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  Projeyi İncele →
-                </a>
+                <div className="md:col-span-2 space-y-4">
+                  <p className="text-gray-600 font-light leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span 
+                        key={techIndex}
+                        className="text-xs uppercase tracking-wide text-blue-600"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))}

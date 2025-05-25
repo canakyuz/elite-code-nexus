@@ -2,49 +2,49 @@
 const Skills = () => {
   const skills = [
     {
-      category: "Frontend Development",
-      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js"]
+      category: "Frontend",
+      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"]
     },
     {
-      category: "Backend Development", 
-      technologies: ["Node.js", "Python", "PostgreSQL", "MongoDB", "GraphQL"]
+      category: "Backend", 
+      technologies: ["Node.js", "Python", "PostgreSQL", "GraphQL"]
     },
     {
-      category: "Cloud & DevOps",
-      technologies: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform"]
+      category: "Cloud",
+      technologies: ["AWS", "Docker", "Kubernetes", "Terraform"]
     },
     {
-      category: "Mobile Development",
-      technologies: ["React Native", "Flutter", "iOS", "Android", "Expo"]
+      category: "Mobile",
+      technologies: ["React Native", "Flutter", "iOS", "Android"]
     }
   ];
 
   return (
-    <section id="skills" className="py-20 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-            Teknik Yetenekler
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Modern teknolojilerle ölçeklenebilir ve sürdürülebilir çözümler geliştiriyorum.
+    <section id="skills" className="py-24 px-6 bg-white">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-16">
+          <p className="text-sm uppercase tracking-widest text-gray-500 font-light mb-4">
+            02 — Teknik Yetenekler
           </p>
+          <h2 className="text-4xl font-light text-gray-900">
+            Kullandığım Teknolojiler
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-16">
           {skills.map((skill, index) => (
             <div key={index} className="space-y-4">
-              <h3 className="text-xl font-medium text-gray-900">
+              <h3 className="text-lg font-light text-gray-900 uppercase tracking-wide">
                 {skill.category}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="space-y-2">
                 {skill.technologies.map((tech, techIndex) => (
-                  <span 
+                  <div 
                     key={techIndex}
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm"
+                    className="text-gray-600 font-light border-b border-gray-100 pb-2"
                   >
                     {tech}
-                  </span>
+                  </div>
                 ))}
               </div>
             </div>

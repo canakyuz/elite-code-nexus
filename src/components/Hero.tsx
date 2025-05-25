@@ -1,32 +1,42 @@
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-20 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 leading-tight mb-8">
-            Dijital dünyayı
-            <span className="block text-blue-600">şekillendiren</span>
-            <span className="block">yazılımcı</span>
+    <section className="pt-32 pb-20 px-6 bg-white">
+      <div className="max-w-4xl mx-auto">
+        <div className="space-y-8">
+          {/* Subtitle */}
+          <p className="text-sm uppercase tracking-widest text-gray-500 font-light">
+            Yazılım Geliştirici ve Girişimci
+          </p>
+          
+          {/* Main Title */}
+          <h1 className="text-6xl md:text-8xl font-light text-gray-900 leading-none">
+            AHMET
+            <span className="block text-blue-600">KOÇ</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12 max-w-2xl">
-            10+ yıllık deneyimle modern teknolojiler kullanarak ölçeklenebilir yazılım çözümleri geliştiren ve başarılı teknoloji şirketleri kuran senior yazılımcı ve girişimci.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a 
-              href="#projects"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Projelerimi İncele
-            </a>
-            <a 
-              href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 border border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors"
-            >
-              İletişime Geç
-            </a>
+          {/* Description */}
+          <div className="max-w-lg">
+            <p className="text-lg text-gray-600 leading-relaxed font-light">
+              10+ yıllık deneyimle yazılım dünyasında yenilik yaratan, 
+              ölçeklenebilir çözümler geliştiren ve teknoloji şirketleri kuran uzman.
+            </p>
+          </div>
+          
+          {/* Simple Stats */}
+          <div className="pt-12 grid grid-cols-3 gap-8 max-w-md">
+            <div>
+              <div className="text-2xl font-light text-blue-600">100+</div>
+              <div className="text-xs uppercase tracking-wide text-gray-500">Proje</div>
+            </div>
+            <div>
+              <div className="text-2xl font-light text-blue-600">5</div>
+              <div className="text-xs uppercase tracking-wide text-gray-500">Şirket</div>
+            </div>
+            <div>
+              <div className="text-2xl font-light text-blue-600">10+</div>
+              <div className="text-xs uppercase tracking-wide text-gray-500">Yıl</div>
+            </div>
           </div>
         </div>
       </div>
