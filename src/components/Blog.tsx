@@ -46,7 +46,7 @@ const Blog = () => {
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1 font-departure">
                           <Calendar className="w-2.5 h-2.5" />
-                          {new Date(post.publishDate).toLocaleDateString('tr-TR', {
+                          {new Date(post.publishDate).toLocaleDateString('en-US', {
                             day: 'numeric',
                             month: 'short'
                           })}
@@ -58,7 +58,7 @@ const Blog = () => {
                       </div>
                       
                       <button className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors font-medium group/link font-departure">
-                        <span className="text-xs">Oku</span>
+                        <span className="text-xs">Read</span>
                         <ArrowRight className="w-2.5 h-2.5 transition-transform group-hover/link:translate-x-1" />
                       </button>
                     </div>

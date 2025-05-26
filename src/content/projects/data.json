@@ -16,31 +16,31 @@
         "content": [
           {
             "type": "paragraph",
-            "text": "NexFit projesi, modern fitness endüstrisinin ihtiyaçlarını karşılamak için geliştirilmiş kapsamlı bir platformdur. Microservice mimarisi kullanarak ölçeklenebilir ve modüler bir çözüm oluşturduk."
+            "text": "The NexFit project is a comprehensive platform developed to meet the needs of the modern fitness industry. We created a scalable and modular solution using microservice architecture."
           },
           {
             "type": "heading",
-            "text": "Teknoloji Seçimleri"
+            "text": "Technology Choices"
           },
           {
             "type": "paragraph",
-            "text": "Backend için Node.js ve Express.js kullanırken, veritabanı olarak PostgreSQL tercih ettik. Frontend'de React ile modern bir kullanıcı arayüzü geliştirdik."
+            "text": "We used Node.js and Express.js for the backend, while choosing PostgreSQL as the database. We developed a modern user interface with React on the frontend."
           },
           {
             "type": "heading",
-            "text": "Microservice Mimarisi"
+            "text": "Microservice Architecture"
           },
           {
             "type": "paragraph",
-            "text": "Sistemimizi kullanıcı yönetimi, egzersiz programlama, ödeme sistemi ve raporlama olmak üzere dört ana mikroservise böldük. Bu yaklaşım bize büyük esneklik sağladı."
+            "text": "We divided our system into four main microservices: user management, exercise programming, payment system, and reporting. This approach provided us with great flexibility."
           },
           {
             "type": "heading",
-            "text": "Karşılaştığımız Zorluklar"
+            "text": "Challenges We Faced"
           },
           {
             "type": "paragraph",
-            "text": "En büyük zorluklardan biri mikroservisler arası iletişimin optimize edilmesiydi. Redis cache sistemi ve API Gateway kullanarak bu sorunu çözdük."
+            "text": "One of the biggest challenges was optimizing inter-microservice communication. We solved this problem by using Redis cache system and API Gateway."
           }
         ]
       }
@@ -52,29 +52,29 @@
       "description": "Fully local, security-focused AI assistant. Privacy-preserving, customizable AI solution that protects user data.",
       "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"],
       "blogContent": {
-        "title": "Atlas AI: Privacy-First Yapay Zeka Asistanı",
+        "title": "Atlas AI: Privacy-First AI Assistant",
         "publishDate": "2024-02-20",
         "readTime": "6 min read",
         "content": [
           {
             "type": "paragraph",
-            "text": "Atlas AI, kullanıcı gizliliğini en üst seviyede tutan, tamamen yerel çalışan bir yapay zeka asistanıdır. Verilerin bulut sunucularına gönderilmediği bu çözüm, kurumsal güvenlik gereksinimleri için ideal."
+            "text": "Atlas AI is an artificial intelligence assistant that maintains the highest level of user privacy and operates completely locally. This solution, where data is not sent to cloud servers, is ideal for corporate security requirements."
           },
           {
             "type": "heading",
-            "text": "Gizlilik Odaklı Tasarım"
+            "text": "Privacy-Focused Design"
           },
           {
             "type": "paragraph",
-            "text": "Tüm AI hesaplamaları kullanıcının kendi cihazında gerçekleşir. Hiçbir veri dış sunuculara gönderilmez, bu da tam gizlilik garantisi sağlar."
+            "text": "All AI computations are performed on the user's own device. No data is sent to external servers, ensuring complete privacy guarantee."
           },
           {
             "type": "heading",
-            "text": "Teknik Altyapı"
+            "text": "Technical Infrastructure"
           },
           {
             "type": "paragraph",
-            "text": "Python ve TensorFlow kullanarak optimize edilmiş yerel LLM modelleri geliştirdik. Electron ile cross-platform masaüstü uygulaması oluşturduk."
+            "text": "We developed optimized local LLM models using Python and TensorFlow. We created a cross-platform desktop application with Electron."
           }
         ]
       }
@@ -86,29 +86,29 @@
       "description": "Customizable modular management system with multi-tenant panel architecture. Scalable infrastructure for SaaS products.",
       "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modular Architecture"],
       "blogContent": {
-        "title": "NexPanel: Modüler SaaS Yönetim Sistemi",
+        "title": "NexPanel: Modular SaaS Management System",
         "publishDate": "2023-11-10",
         "readTime": "10 min read",
         "content": [
           {
             "type": "paragraph",
-            "text": "NexPanel, SaaS ürünleri için geliştirilmiş modüler ve çok kiracılı yönetim paneli sistemidir. Farklı müşteri ihtiyaçlarına göre özelleştirilebilir yapısı ile öne çıkar."
+            "text": "NexPanel is a modular and multi-tenant management panel system developed for SaaS products. It stands out with its customizable structure according to different customer needs."
           },
           {
             "type": "heading",
-            "text": "Multi-Tenant Mimari"
+            "text": "Multi-Tenant Architecture"
           },
           {
             "type": "paragraph",
-            "text": "Her müşterinin kendi izole ortamına sahip olduğu, ancak aynı kod tabanını paylaştığı akıllı bir mimari tasarladık."
+            "text": "We designed an intelligent architecture where each customer has their own isolated environment but shares the same codebase."
           },
           {
             "type": "heading",
-            "text": "Modüler Yapı"
+            "text": "Modular Structure"
           },
           {
             "type": "paragraph",
-            "text": "Sistem, müşteri ihtiyaçlarına göre aktif/pasif edilebilen modüllerden oluşur. Bu sayede her müşteri sadece ihtiyacı olan özellikleri kullanır."
+            "text": "The system consists of modules that can be activated/deactivated according to customer needs. This way, each customer uses only the features they need."
           }
         ]
       }
@@ -120,13 +120,13 @@
       "description": "AI-powered CV builder and appointment management system. Customer-focused solutions with SaaS model.",
       "technologies": ["React", "AI/ML", "SaaS", "Customer Management"],
       "blogContent": {
-        "title": "NexCV & NexBook: AI Destekli İş Çözümleri",
+        "title": "NexCV & NexBook: AI-Powered Business Solutions",
         "publishDate": "2023-09-05",
         "readTime": "7 min read",
         "content": [
           {
             "type": "paragraph",
-            "text": "NexCV ve NexBook, yapay zeka destekli CV oluşturma ve randevu yönetim sistemleri olarak geliştirildi. İki farklı ihtiyaca yönelik entegre çözümler sunar."
+            "text": "NexCV and NexBook were developed as AI-powered CV creation and appointment management systems. They offer integrated solutions for two different needs."
           },
           {
             "type": "heading",
@@ -134,15 +134,15 @@
           },
           {
             "type": "paragraph",
-            "text": "NexCV, kullanıcıların profesyonel CV'lerini AI yardımıyla oluşturmasına olanak tanır. Sektör standartlarına uygun tasarımlar ve içerik önerileri sunar."
+            "text": "NexCV allows users to create professional CVs with AI assistance. It offers industry-standard designs and content suggestions."
           },
           {
             "type": "heading",
-            "text": "Akıllı Randevu Sistemi"
+            "text": "Smart Appointment System"
           },
           {
             "type": "paragraph",
-            "text": "NexBook, işletmelerin randevu süreçlerini otomatize eder. Müşteri tercihlerini öğrenen AI, en uygun randevu saatlerini önerir."
+            "text": "NexBook automates business appointment processes. AI that learns customer preferences suggests the most suitable appointment times."
           }
         ]
       }

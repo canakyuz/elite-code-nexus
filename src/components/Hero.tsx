@@ -4,7 +4,7 @@ import heroData from "@/content/hero/data.json";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
+    <section id="hero" className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
       {/* 3D Background sadece hero bölümünde */}
       <div className="absolute inset-0 z-0">
         <ThreeBackground />

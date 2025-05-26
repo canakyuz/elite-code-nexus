@@ -23,6 +23,14 @@ const Navbar = () => {
     }
   };
 
+  const navItems = [
+    { label: 'ABOUT', id: 'about' },
+    { label: 'PROJECTS', id: 'work' },
+    { label: 'SKILLS', id: 'skills' },
+    { label: 'BLOG', id: 'blog' },
+    { label: 'CONTACT', id: 'contact' }
+  ];
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-lg' : 'bg-transparent'
@@ -30,19 +38,16 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+            <button 
+              onClick={() => scrollToSection('hero')}
+              className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+            >
               <span className="text-white font-bold text-sm font-departure">CA</span>
-            </div>
+            </button>
           </div>
 
           <div className="hidden md:flex items-center space-x-6">
-            {[
-              { label: 'HAKKIMDA', id: 'about' },
-              { label: 'PROJELER', id: 'work' },
-              { label: 'YETENEKLER', id: 'skills' },
-              { label: 'BLOG', id: 'blog' },
-              { label: 'İLETİŞİM', id: 'contact' }
-            ].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
@@ -65,13 +70,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-slate-200 bg-white/95 backdrop-blur-md">
             <div className="flex flex-col space-y-2">
-              {[
-                { label: 'HAKKIMDA', id: 'about' },
-                { label: 'PROJELER', id: 'work' },
-                { label: 'YETENEKLER', id: 'skills' },
-                { label: 'BLOG', id: 'blog' },
-                { label: 'İLETİŞİM', id: 'contact' }
-              ].map((item) => (
+              {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}

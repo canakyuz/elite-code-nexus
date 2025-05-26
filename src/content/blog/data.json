@@ -1,33 +1,33 @@
 
 {
   "sectionNumber": "04",
-  "title": "Son Yazılarım",
-  "subtitle": "Teknoloji, yazılım geliştirme ve tasarım üzerine düşüncelerim",
+  "title": "Latest Articles",
+  "subtitle": "My thoughts on technology, software development and design",
   "posts": [
     {
       "id": "react-best-practices",
-      "title": "React'te En İyi Uygulamalar",
-      "excerpt": "Modern React geliştirmede dikkat edilmesi gereken önemli noktalara değineceğim.",
+      "title": "React Best Practices",
+      "excerpt": "Key points to consider in modern React development that I'll address.",
       "publishDate": "2024-05-20",
-      "readTime": "8 dk okuma",
+      "readTime": "8 min read",
       "category": "React",
       "slug": "react-best-practices"
     },
     {
       "id": "design-systems",
-      "title": "Design System Nedir ve Neden Önemlidir?",
-      "excerpt": "Büyük projelerde tutarlılık sağlamak için design system kullanımının avantajları.",
+      "title": "What is a Design System and Why is it Important?",
+      "excerpt": "Advantages of using design systems to ensure consistency in large projects.",
       "publishDate": "2024-05-15",
-      "readTime": "6 dk okuma",
-      "category": "Tasarım",
+      "readTime": "6 min read",
+      "category": "Design",
       "slug": "design-systems"
     },
     {
       "id": "typescript-tips",
-      "title": "TypeScript ile Daha İyi Kod Yazma",
-      "excerpt": "TypeScript'in gücünü kullanarak daha güvenli ve sürdürülebilir kod yazma teknikleri.",
+      "title": "Writing Better Code with TypeScript",
+      "excerpt": "Techniques for writing safer and more maintainable code using TypeScript's power.",
       "publishDate": "2024-05-10",
-      "readTime": "10 dk okuma",
+      "readTime": "10 min read",
       "category": "TypeScript",
       "slug": "typescript-tips"
     }

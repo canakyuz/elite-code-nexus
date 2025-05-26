@@ -58,7 +58,7 @@ const Projects = () => {
                         to={`/project/${project.id}`}
                         className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-medium group/link px-4 py-2 rounded-lg hover:bg-blue-50 font-departure text-xs"
                       >
-                        Detayları İncele
+                        View Details
                         <ArrowRight className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
                       </Link>
                     </div>
