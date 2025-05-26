@@ -1,3 +1,4 @@
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, Points, PointMaterial } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
@@ -113,52 +114,6 @@ const WorldGlobe = () => {
 const SimpleMobius = () => {
   const mobiusRef = useRef<THREE.Mesh>(null);
   
-  const geometry = useMemo(() => {
-    const geometry = new THREE.BufferGeometry();
-    const vertices = [];
-    const indices = [];
-    const uvs = [];
-    
-    const uSegments = 100;
-    const vSegments = 20;
-    const radius = 2.5;
-    
-    // Generate vertices for Mobius strip
-    for (let i = 0; i <= uSegments; i++) {
-      for (let j = 0; j <= vSegments; j++) {
-        const u = (i / uSegments) * Math.PI * 2;
-        const v = ((j / vSegments) - 0.5) * 0.3;
-        
-        const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
-        const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
-        const z = v * Math.sin(u / 2);
-        
-        vertices.push(x, y, z);
-        uvs.push(i / uSegments, j / vSegments);
-      }
-    }
-    
-    // Generate indices
-    for (let i = 0; i < uSegments; i++) {
-      for (let j = 0; j < vSegments; j++) {
-        const a = i * (vSegments + 1) + j;
-        const b = a + vSegments + 1;
-        const c = a + 1;
-        const d = b + 1;
-        
-        indices.push(a, b, c);
-        indices.push(b, d, c);
-      }
-    }
-    
-    geometry.setIndex(indices);
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-    geometry.computeVertexNormals();
-    
-    return geometry;
-  }, []);
-  
   useFrame((state) => {
     if (mobiusRef.current) {
       mobiusRef.current.rotation.x = state.clock.elapsedTime * 0.02;
@@ -168,13 +123,13 @@ const SimpleMobius = () => {
   });
 
   return (
-    <mesh ref={mobiusRef} geometry={geometry} scale={0.8} position={[0, 0, 0]}>
+    <mesh ref={mobiusRef} scale={0.8} position={[0, 0, 0]}>
+      <torusGeometry args={[2.5, 0.3, 16, 100]} />
       <meshLambertMaterial 
         color="#60a5fa"
         transparent 
         opacity={0.7}
         side={THREE.DoubleSide}
-        wireframe={false}
       />
     </mesh>
   );
