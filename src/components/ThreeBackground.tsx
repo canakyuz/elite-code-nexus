@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
 import WorldGlobe from './three/WorldGlobe';
-import NeuralNetwork from './three/NeuralNetwork';
 import FloatingParticles from './three/FloatingParticles';
 
 const Scene = () => {
@@ -13,7 +12,7 @@ const Scene = () => {
         enableZoom={true}
         enablePan={false}
         autoRotate={true}
-        autoRotateSpeed={0.5}
+        autoRotateSpeed={0.3}
         maxDistance={12}
         minDistance={4}
         enableDamping={true}
@@ -22,16 +21,15 @@ const Scene = () => {
       
       <FloatingParticles />
       <WorldGlobe />
-      <NeuralNetwork />
       
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.6} color="#ffffff" />
-      <pointLight position={[-3, 3, 3]} intensity={0.8} color="#00d4ff" />
-      <pointLight position={[3, -3, -3]} intensity={0.6} color="#8b5cf6" />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 5, 5]} intensity={0.4} color="#ffffff" />
+      <pointLight position={[-3, 3, 3]} intensity={0.6} color="#9de3cb" />
+      <pointLight position={[3, -3, -3]} intensity={0.5} color="#96ca6b" />
       <hemisphereLight 
         color="#ffffff"
-        groundColor="#0ea5e9"
-        intensity={0.3}
+        groundColor="#9de3cb"
+        intensity={0.2}
       />
     </>
   );
