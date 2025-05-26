@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -39,6 +38,10 @@ const Navbar = () => {
               SKILLS
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></div>
             </a>
+            <a href="#blog" className="text-slate-600 hover:text-blue-600 transition-all duration-300 text-sm font-medium tracking-wide relative group">
+              BLOG
+              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></div>
+            </a>
             <a href="#contact" className="text-slate-600 hover:text-blue-600 transition-all duration-300 text-sm font-medium tracking-wide relative group">
               CONTACT
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></div>
@@ -63,6 +66,7 @@ const Navbar = () => {
               <a href="#about" className="text-slate-600 text-sm font-medium tracking-wide">ABOUT</a>
               <a href="#work" className="text-slate-600 text-sm font-medium tracking-wide">PROJECTS</a>
               <a href="#skills" className="text-slate-600 text-sm font-medium tracking-wide">SKILLS</a>
+              <a href="#blog" className="text-slate-600 text-sm font-medium tracking-wide">BLOG</a>
               <a href="#contact" className="text-slate-600 text-sm font-medium tracking-wide">CONTACT</a>
             </div>
           </div>

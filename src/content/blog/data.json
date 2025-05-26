@@ -1,0 +1,35 @@
+
+{
+  "sectionNumber": "04",
+  "title": "Son Yazılarım",
+  "subtitle": "Teknoloji, yazılım geliştirme ve tasarım üzerine düşüncelerim",
+  "posts": [
+    {
+      "id": "react-best-practices",
+      "title": "React'te En İyi Uygulamalar",
+      "excerpt": "Modern React geliştirmede dikkat edilmesi gereken önemli noktalara değineceğim.",
+      "publishDate": "2024-05-20",
+      "readTime": "8 dk okuma",
+      "category": "React",
+      "slug": "react-best-practices"
+    },
+    {
+      "id": "design-systems",
+      "title": "Design System Nedir ve Neden Önemlidir?",
+      "excerpt": "Büyük projelerde tutarlılık sağlamak için design system kullanımının avantajları.",
+      "publishDate": "2024-05-15",
+      "readTime": "6 dk okuma",
+      "category": "Tasarım",
+      "slug": "design-systems"
+    },
+    {
+      "id": "typescript-tips",
+      "title": "TypeScript ile Daha İyi Kod Yazma",
+      "excerpt": "TypeScript'in gücünü kullanarak daha güvenli ve sürdürülebilir kod yazma teknikleri.",
+      "publishDate": "2024-05-10",
+      "readTime": "10 dk okuma",
+      "category": "TypeScript",
+      "slug": "typescript-tips"
+    }
+  ]
+}
