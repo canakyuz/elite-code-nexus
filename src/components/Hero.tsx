@@ -5,10 +5,13 @@ import heroData from "@/content/hero/data.json";
 const Hero = () => {
   return (
     <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
-      <ThreeBackground />
+      {/* 3D Background sadece hero bölümünde */}
+      <div className="absolute inset-0 z-0">
+        <ThreeBackground />
+      </div>
       
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/20 z-5"></div>
+      <div className="absolute inset-0 bg-black/30 z-5"></div>
       
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-6 w-full">

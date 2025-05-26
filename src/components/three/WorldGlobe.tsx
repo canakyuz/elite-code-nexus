@@ -1,3 +1,4 @@
+
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -5,11 +6,12 @@ import * as THREE from 'three';
 const WorldGlobe = () => {
   const globeRef = useRef<THREE.Group>(null);
   const pointsRef = useRef<THREE.Points>(null);
+  const innerGlowRef = useRef<THREE.Mesh>(null);
   
   // Create world outline points based on actual world coordinates
   const worldPoints = useMemo(() => {
     const points = [];
-    const radius = 1.2;
+    const radius = 1.4;
     
     // Add more detailed world outline
     const worldCoordinates = [
@@ -56,10 +58,10 @@ const WorldGlobe = () => {
       const theta = (coord.lng + 180) * (Math.PI / 180);
       
       // Add multiple points around each coordinate for density
-      for (let i = 0; i < 3; i++) {
-        const offsetPhi = phi + (Math.random() - 0.5) * 0.05;
-        const offsetTheta = theta + (Math.random() - 0.5) * 0.05;
-        const offsetRadius = radius + (Math.random() - 0.5) * 0.02;
+      for (let i = 0; i < 4; i++) {
+        const offsetPhi = phi + (Math.random() - 0.5) * 0.08;
+        const offsetTheta = theta + (Math.random() - 0.5) * 0.08;
+        const offsetRadius = radius + (Math.random() - 0.5) * 0.03;
         
         points.push(
           offsetRadius * Math.sin(offsetPhi) * Math.cos(offsetTheta),
@@ -74,28 +76,39 @@ const WorldGlobe = () => {
 
   useFrame((state) => {
     if (globeRef.current) {
-      globeRef.current.rotation.y = state.clock.elapsedTime * 0.08;
+      globeRef.current.rotation.y = state.clock.elapsedTime * 0.1;
     }
     
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.06;
+      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.08;
+      
+      // Parçacıklarda nabız etkisi
+      const time = state.clock.elapsedTime;
+      const material = pointsRef.current.material as THREE.PointsMaterial;
+      material.opacity = 0.8 + Math.sin(time * 2) * 0.2;
+    }
+
+    if (innerGlowRef.current) {
+      const time = state.clock.elapsedTime;
+      const material = innerGlowRef.current.material as THREE.MeshBasicMaterial;
+      material.opacity = 0.3 + Math.sin(time * 1.5) * 0.1;
     }
   });
 
   return (
     <group ref={globeRef} position={[0, 0, 0]}>
-      {/* Base globe wireframe with glow */}
+      {/* Base globe wireframe with enhanced glow */}
       <mesh>
-        <sphereGeometry args={[1.15, 64, 64]} />
+        <sphereGeometry args={[1.35, 64, 64]} />
         <meshBasicMaterial 
           wireframe 
-          color="#00d4ff" 
+          color="#00ffff" 
           transparent 
-          opacity={0.6} 
+          opacity={0.8} 
         />
       </mesh>
       
-      {/* World outline points - brighter */}
+      {/* World outline points - much brighter */}
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -106,31 +119,40 @@ const WorldGlobe = () => {
           />
         </bufferGeometry>
         <pointsMaterial 
-          size={0.035} 
+          size={0.04} 
           color="#00ffff" 
           transparent 
-          opacity={0.9}
+          opacity={1.0}
           sizeAttenuation={true}
         />
       </points>
       
-      {/* Inner glow - brighter */}
-      <mesh>
-        <sphereGeometry args={[1.0, 32, 32]} />
+      {/* Inner glow - pulsing */}
+      <mesh ref={innerGlowRef}>
+        <sphereGeometry args={[1.2, 32, 32]} />
         <meshBasicMaterial 
           color="#00d4ff" 
           transparent 
-          opacity={0.2}
+          opacity={0.3}
         />
       </mesh>
       
-      {/* Outer glow effect */}
+      {/* Outer glow effect layers */}
       <mesh>
-        <sphereGeometry args={[1.3, 32, 32]} />
+        <sphereGeometry args={[1.5, 32, 32]} />
         <meshBasicMaterial 
           color="#0099cc" 
           transparent 
-          opacity={0.1}
+          opacity={0.15}
+        />
+      </mesh>
+      
+      <mesh>
+        <sphereGeometry args={[1.7, 32, 32]} />
+        <meshBasicMaterial 
+          color="#006699" 
+          transparent 
+          opacity={0.08}
         />
       </mesh>
     </group>
