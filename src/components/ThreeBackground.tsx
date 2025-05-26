@@ -1,4 +1,3 @@
-
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, Points, PointMaterial } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
@@ -88,25 +87,34 @@ const WorldGlobe = () => {
   return (
     <group ref={globeRef}>
       {/* Base globe wireframe */}
-      <Sphere args={[1.15, 32, 32]}>
+      <mesh>
+        <sphereGeometry args={[1.15, 32, 32]} />
         <meshBasicMaterial 
           wireframe 
           color="#1e3a8a" 
           transparent 
           opacity={0.1} 
         />
-      </Sphere>
+      </mesh>
       
       {/* World outline points */}
-      <Points ref={pointsRef} positions={worldPoints}>
-        <PointMaterial 
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={worldPoints.length / 3}
+            array={worldPoints}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial 
           size={0.015} 
           color="#3b82f6" 
           transparent 
           opacity={0.8}
           sizeAttenuation={true}
         />
-      </Points>
+      </points>
     </group>
   );
 };
@@ -158,15 +166,23 @@ const FloatingParticles = () => {
   });
 
   return (
-    <Points ref={particlesRef} positions={particlePositions}>
-      <PointMaterial 
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={particlePositions.length / 3}
+          array={particlePositions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial 
         size={0.008} 
         color="#60a5fa" 
         transparent 
         opacity={0.6}
         sizeAttenuation={true}
       />
-    </Points>
+    </points>
   );
 };
 
