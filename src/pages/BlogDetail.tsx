@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, List, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -51,22 +52,22 @@ const BlogDetail = () => {
     }
   }, [groupedPosts, selectedCategory]);
 
-  // Enhanced content sections
+  // Enhanced content sections with English content
   const contentSections = [
     {
       id: "introduction",
-      title: "Giriş",
-      content: "Modern React geliştirmede en iyi uygulamaları bu makalede detaylarıyla ele alacağız. React'in güçlü özelliklerini nasıl etkili bir şekilde kullanabileceğinizi öğreneceksiniz."
+      title: "Introduction",
+      content: "In this comprehensive guide, we'll explore the best practices for modern React development. You'll learn how to effectively leverage React's powerful features to build maintainable and scalable applications."
     },
     {
       id: "component-architecture",
-      title: "Bileşen Mimarisi",
-      content: "React bileşenlerini doğru şekilde yapılandırmak, sürdürülebilir ve ölçeklenebilir uygulamalar geliştirmenin temelidir.",
+      title: "Component Architecture",
+      content: "Properly structuring React components is the foundation of building sustainable and scalable applications. Let's dive into the key principles.",
       subsections: [
         {
           id: "functional-components",
-          title: "Fonksiyonel Bileşenler",
-          content: "Modern React'te fonksiyonel bileşenler kullanmayı tercih edin:",
+          title: "Functional Components",
+          content: "Prefer functional components in modern React development:",
           code: `import React, { useState, useEffect } from 'react';
 
 const UserProfile = ({ userId }) => {
@@ -80,7 +81,7 @@ const UserProfile = ({ userId }) => {
         const userData = await response.json();
         setUser(userData);
       } catch (error) {
-        console.error('Kullanıcı bilgileri alınamadı:', error);
+        console.error('Failed to fetch user data:', error);
       } finally {
         setLoading(false);
       }
@@ -89,8 +90,8 @@ const UserProfile = ({ userId }) => {
     fetchUser();
   }, [userId]);
 
-  if (loading) return <div>Yükleniyor...</div>;
-  if (!user) return <div>Kullanıcı bulunamadı</div>;
+  if (loading) return <div>Loading...</div>;
+  if (!user) return <div>User not found</div>;
 
   return (
     <div className="user-profile">
@@ -104,8 +105,8 @@ export default UserProfile;`
         },
         {
           id: "custom-hooks",
-          title: "Özel Hook'lar",
-          content: "Tekrar kullanılabilir mantığı özel hook'lara ayırın:",
+          title: "Custom Hooks",
+          content: "Extract reusable logic into custom hooks:",
           code: `import { useState, useEffect } from 'react';
 
 const useApi = (url) => {
@@ -119,7 +120,7 @@ const useApi = (url) => {
         setLoading(true);
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error('Veri alınamadı');
+          throw new Error('Failed to fetch data');
         }
         const result = await response.json();
         setData(result);
@@ -140,35 +141,35 @@ const useApi = (url) => {
     },
     {
       id: "state-management",
-      title: "State Yönetimi",
-      content: "React'te state yönetimi için doğru yöntemleri seçmek kritik önem taşır.",
+      title: "State Management",
+      content: "Choosing the right approach for state management in React is crucial for application performance and maintainability.",
       subsections: [
         {
           id: "usestate-best-practices",
-          title: "useState En İyi Uygulamaları",
-          content: "State güncellemelerinde dikkat edilmesi gereken noktalar:",
-          code: `// ❌ Yanlış kullanım
+          title: "useState Best Practices",
+          content: "Key considerations when updating state:",
+          code: `// ❌ Wrong approach
 const [user, setUser] = useState({});
-setUser(user.name = 'Yeni İsim'); // Direkt mutasyon
+setUser(user.name = 'New Name'); // Direct mutation
 
-// ✅ Doğru kullanım
+// ✅ Correct approach
 const [user, setUser] = useState({});
 setUser(prevUser => ({
   ...prevUser,
-  name: 'Yeni İsim'
+  name: 'New Name'
 }));`
         }
       ]
     },
     {
       id: "performance",
-      title: "Performans Optimizasyonu",
-      content: "React uygulamalarında performansı artırmak için kullanabileceğiniz teknikler.",
+      title: "Performance Optimization",
+      content: "Techniques to improve performance in React applications and deliver better user experiences.",
       subsections: [
         {
           id: "memo-optimization",
-          title: "React.memo ve useMemo",
-          content: "Gereksiz render'ları önlemek için memoization kullanın:",
+          title: "React.memo and useMemo",
+          content: "Use memoization to prevent unnecessary re-renders:",
           code: `import React, { memo, useMemo } from 'react';
 
 const ExpensiveComponent = memo(({ data, filter }) => {
@@ -191,8 +192,8 @@ const ExpensiveComponent = memo(({ data, filter }) => {
     },
     {
       id: "conclusion",
-      title: "Sonuç",
-      content: "Bu makalede React geliştirmede dikkat edilmesi gereken en önemli noktaları ele aldık. Bu uygulamaları projelerinizde kullanarak daha temiz, performanslı ve sürdürülebilir kod yazabilirsiniz."
+      title: "Conclusion",
+      content: "We've covered the most important aspects of React development best practices. By implementing these patterns in your projects, you can write cleaner, more performant, and maintainable code."
     }
   ];
 
@@ -258,10 +259,10 @@ const ExpensiveComponent = memo(({ data, filter }) => {
         <Navbar />
         <div className="pt-32 pb-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-8">Blog Yazısı Bulunamadı</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-8">Blog Post Not Found</h1>
             <Button onClick={() => navigate('/')} variant="outline">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Ana Sayfaya Dön
+              Back to Home
             </Button>
           </div>
         </div>
@@ -277,23 +278,23 @@ const ExpensiveComponent = memo(({ data, filter }) => {
       <div className="pt-20">
         <div className="flex max-w-7xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
           {/* Left Sidebar - Posts List */}
-          <div className="w-80 bg-gray-50 border-r border-gray-200 h-screen sticky top-20 overflow-hidden">
-            <div className="p-6 border-b border-gray-200 bg-white">
-              <Button onClick={() => navigate('/')} variant="ghost" size="sm" className="mb-4 -ml-2 text-gray-700 hover:text-gray-900">
+          <div className="w-72 bg-gray-50 border-r border-gray-200 h-screen sticky top-20 overflow-hidden">
+            <div className="p-5 border-b border-gray-200 bg-white">
+              <Button onClick={() => navigate('/')} variant="ghost" size="sm" className="mb-3 -ml-2 text-gray-700 hover:text-gray-900">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Ana Sayfaya Dön
+                Back to Home
               </Button>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Tüm Yazılar</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">All Posts</h2>
               
-              {/* Category Badges */}
-              <div className="mb-6">
+              {/* Category Badges - More Compact */}
+              <div className="mb-4">
                 <ScrollArea className="w-full">
-                  <div className="flex gap-2 pb-2">
+                  <div className="flex gap-1.5 pb-2">
                     {Object.keys(groupedPosts).map(category => (
                       <Badge
                         key={category}
                         variant={selectedCategory === category ? "default" : "outline"}
-                        className={`cursor-pointer whitespace-nowrap transition-all hover:shadow-sm ${
+                        className={`cursor-pointer whitespace-nowrap transition-all hover:shadow-sm text-xs px-2 py-1 ${
                           selectedCategory === category 
                             ? 'bg-blue-500 text-white hover:bg-blue-600' 
                             : 'text-gray-700 hover:text-blue-600 hover:border-blue-300'
@@ -309,13 +310,13 @@ const ExpensiveComponent = memo(({ data, filter }) => {
             </div>
             
             <ScrollArea className="h-full pb-20">
-              <div className="p-6">
-                <div className="space-y-3">
+              <div className="p-5">
+                <div className="space-y-2.5">
                   {selectedCategory && groupedPosts[selectedCategory]?.map(blogPost => (
                     <div 
                       key={blogPost.id}
                       onClick={() => navigate(`/blog/${blogPost.slug}`)}
-                      className={`p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md ${
+                      className={`p-3 rounded-lg border cursor-pointer transition-all hover:shadow-md ${
                         blogPost.slug === slug 
                           ? 'bg-blue-50 border-blue-200 shadow-sm' 
                           : 'bg-white border-gray-200 hover:border-gray-300'
@@ -326,7 +327,7 @@ const ExpensiveComponent = memo(({ data, filter }) => {
                       }`}>
                         {blogPost.title}
                       </h3>
-                      <p className={`text-xs mb-3 line-clamp-2 ${
+                      <p className={`text-xs mb-2 line-clamp-2 ${
                         blogPost.slug === slug ? 'text-blue-700' : 'text-gray-600'
                       }`}>
                         {blogPost.excerpt}
@@ -336,7 +337,7 @@ const ExpensiveComponent = memo(({ data, filter }) => {
                       }`}>
                         <div className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {new Date(blogPost.publishDate).toLocaleDateString('tr-TR', {
+                          {new Date(blogPost.publishDate).toLocaleDateString('en-US', {
                             month: 'short',
                             day: 'numeric'
                           })}
@@ -353,125 +354,123 @@ const ExpensiveComponent = memo(({ data, filter }) => {
             </ScrollArea>
           </div>
 
-          {/* Main Content */}
+          {/* Main Content - Optimized */}
           <div className="flex-1 bg-white">
-            <div className="px-12 py-12">
-              <div className="max-w-4xl">
-                {/* Header */}
-                <div className="mb-12">
-                  <div className="flex items-start justify-between mb-6">
-                    <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-                      {post.title}
-                    </h1>
-                    <div className="bg-blue-500 px-4 py-2 rounded-full">
-                      <span className="text-sm text-white font-medium">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center gap-6 text-sm text-gray-500 pb-8 border-b border-gray-200">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-blue-500" />
-                      {new Date(post.publishDate).toLocaleDateString('tr-TR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-blue-500" />
-                      {post.readTime}
-                    </div>
+            <div className="px-8 py-8 max-w-4xl">
+              {/* Header - More Compact */}
+              <div className="mb-8">
+                <div className="flex items-start justify-between mb-5">
+                  <h1 className="text-4xl font-bold text-gray-900 leading-tight max-w-3xl">
+                    {post.title}
+                  </h1>
+                  <div className="bg-blue-500 px-3 py-1.5 rounded-full ml-4">
+                    <span className="text-sm text-white font-medium">
+                      {post.category}
+                    </span>
                   </div>
                 </div>
+                
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  {post.excerpt}
+                </p>
+                
+                <div className="flex items-center gap-6 text-sm text-gray-500 pb-6 border-b border-gray-200">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-blue-500" />
+                    {new Date(post.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-500" />
+                    {post.readTime}
+                  </div>
+                </div>
+              </div>
 
-                {/* Content */}
-                <div className="space-y-12">
-                  {contentSections.map(section => (
-                    <div key={section.id}>
-                      <h2 
-                        data-section-id={section.id}
-                        className="text-3xl font-bold text-gray-900 mb-6 border-l-4 border-blue-500 pl-4"
-                      >
-                        {section.title}
-                      </h2>
-                      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                        {section.content}
-                      </p>
-                      
-                      {section.subsections && (
-                        <div className="space-y-10 ml-6">
-                          {section.subsections.map(subsection => (
-                            <div key={subsection.id}>
-                              <h3 
-                                data-section-id={subsection.id}
-                                className="text-2xl font-semibold text-gray-800 mb-4"
-                              >
-                                {subsection.title}
-                              </h3>
-                              <p className="text-gray-700 mb-6 leading-relaxed">
-                                {subsection.content}
-                              </p>
-                              {subsection.code && (
-                                <div className="mb-8">
-                                  <SyntaxHighlighter
-                                    language="javascript"
-                                    style={vscDarkPlus}
-                                    customStyle={{
-                                      borderRadius: '12px',
-                                      fontSize: '14px',
-                                      lineHeight: '1.6'
-                                    }}
-                                    showLineNumbers={true}
-                                  >
-                                    {subsection.code}
-                                  </SyntaxHighlighter>
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+              {/* Content - Better Optimized */}
+              <div className="space-y-10">
+                {contentSections.map(section => (
+                  <div key={section.id}>
+                    <h2 
+                      data-section-id={section.id}
+                      className="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-blue-500 pl-4"
+                    >
+                      {section.title}
+                    </h2>
+                    <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                      {section.content}
+                    </p>
+                    
+                    {section.subsections && (
+                      <div className="space-y-8 ml-4">
+                        {section.subsections.map(subsection => (
+                          <div key={subsection.id}>
+                            <h3 
+                              data-section-id={subsection.id}
+                              className="text-xl font-semibold text-gray-800 mb-3"
+                            >
+                              {subsection.title}
+                            </h3>
+                            <p className="text-gray-700 mb-4 leading-relaxed">
+                              {subsection.content}
+                            </p>
+                            {subsection.code && (
+                              <div className="mb-6">
+                                <SyntaxHighlighter
+                                  language="javascript"
+                                  style={vscDarkPlus}
+                                  customStyle={{
+                                    borderRadius: '8px',
+                                    fontSize: '13px',
+                                    lineHeight: '1.5'
+                                  }}
+                                  showLineNumbers={true}
+                                >
+                                  {subsection.code}
+                                </SyntaxHighlighter>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Right Sidebar - Table of Contents */}
-          <div className="w-80 bg-gray-50 border-l border-gray-200 h-screen sticky top-20 overflow-hidden">
-            <div className="p-6">
-              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200">
-                <List className="w-5 h-5 text-blue-500" />
-                <h3 className="font-semibold text-gray-900">İçindekiler</h3>
+          {/* Right Sidebar - Table of Contents (More Compact) */}
+          <div className="w-64 bg-gray-50 border-l border-gray-200 h-screen sticky top-20 overflow-hidden">
+            <div className="p-4">
+              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
+                <List className="w-4 h-4 text-blue-500" />
+                <h3 className="font-semibold text-gray-900 text-sm">Contents</h3>
               </div>
               
               <ScrollArea className="h-full">
-                <nav className="space-y-2">
+                <nav className="space-y-1">
                   {tableOfContents.map(item => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-all ${
+                      className={`w-full text-left px-3 py-2 rounded-md text-xs transition-all ${
                         activeSection === item.id 
                           ? 'bg-blue-100 text-blue-900 font-medium border border-blue-200' 
                           : 'text-gray-700 hover:text-gray-900 hover:bg-white'
                       }`}
                       style={{
-                        paddingLeft: `${(item.level - 1) * 12 + 16}px`,
-                        fontSize: item.level === 2 ? '14px' : '13px',
+                        paddingLeft: `${(item.level - 1) * 8 + 12}px`,
+                        fontSize: item.level === 2 ? '12px' : '11px',
                         fontWeight: item.level === 2 ? '500' : '400'
                       }}
                     >
-                      <div className="flex items-center gap-2">
-                        {item.level === 2 && <div className="w-2 h-2 rounded-full bg-blue-500" />}
-                        {item.level === 3 && <div className="w-1.5 h-1.5 rounded-full bg-gray-400" />}
+                      <div className="flex items-center gap-1.5">
+                        {item.level === 2 && <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />}
+                        {item.level === 3 && <div className="w-1 h-1 rounded-full bg-gray-400" />}
                         <span className="line-clamp-2">{item.text}</span>
                       </div>
                     </button>
