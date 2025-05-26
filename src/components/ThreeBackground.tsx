@@ -80,34 +80,26 @@ const NeuralWorldMap = () => {
         </mesh>
       ))}
       
-      {/* Connections */}
+      {/* Connections using proper mesh lines */}
       {connections.map((connection, index) => {
-        const start = nodes[connection.from].position;
-        const end = nodes[connection.to].position;
-        const midPoint = [
-          (start[0] + end[0]) / 2,
-          (start[1] + end[1]) / 2,
-          (start[2] + end[2]) / 2
-        ] as [number, number, number];
+        const start = new THREE.Vector3(...nodes[connection.from].position);
+        const end = new THREE.Vector3(...nodes[connection.to].position);
         
-        const distance = Math.sqrt(
-          Math.pow(end[0] - start[0], 2) +
-          Math.pow(end[1] - start[1], 2) +
-          Math.pow(end[2] - start[2], 2)
-        );
-
+        const points = [start, end];
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        
         return (
-          <line key={index}>
-            <bufferGeometry>
-              <bufferAttribute
-                attach="attributes-position"
-                count={2}
-                array={new Float32Array([...start, ...end])}
-                itemSize={3}
-              />
-            </bufferGeometry>
-            <lineBasicMaterial color="#3b82f6" transparent opacity={0.4} />
-          </line>
+          <primitive 
+            key={index} 
+            object={new THREE.Line(
+              geometry, 
+              new THREE.LineBasicMaterial({ 
+                color: "#3b82f6", 
+                transparent: true, 
+                opacity: 0.4 
+              })
+            )} 
+          />
         );
       })}
     </group>
