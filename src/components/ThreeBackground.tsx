@@ -7,7 +7,6 @@ import * as THREE from 'three';
 
 const NeuralWorldMap = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const linesRef = useRef<THREE.Group>(null);
   
   const { nodes, connections } = useMemo(() => {
     // Major world cities coordinates
@@ -65,15 +64,20 @@ const NeuralWorldMap = () => {
     return { nodes, connections };
   }, []);
 
-  // Create line geometries
-  const lineGeometries = useMemo(() => {
+  // Create line objects
+  const lineObjects = useMemo(() => {
     return connections.map(connection => {
       const points = [
         new THREE.Vector3(...nodes[connection.from].position),
         new THREE.Vector3(...nodes[connection.to].position)
       ];
       const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      return geometry;
+      const material = new THREE.LineBasicMaterial({ 
+        color: "#3b82f6", 
+        transparent: true, 
+        opacity: 0.6 
+      });
+      return new THREE.Line(geometry, material);
     });
   }, [connections, nodes]);
 
@@ -94,13 +98,9 @@ const NeuralWorldMap = () => {
       ))}
       
       {/* Connection lines */}
-      <group ref={linesRef}>
-        {lineGeometries.map((geometry, index) => (
-          <line key={`line-${index}`} geometry={geometry}>
-            <lineBasicMaterial color="#3b82f6" transparent opacity={0.6} />
-          </line>
-        ))}
-      </group>
+      {lineObjects.map((lineObject, index) => (
+        <primitive key={`line-${index}`} object={lineObject} />
+      ))}
     </group>
   );
 };
