@@ -23,31 +23,31 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-32 px-6 bg-slate-50">
+      <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-20">
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-8">
             <div className="space-y-4">
-              <div className="text-8xl font-light text-blue-200">{contactData.sectionNumber}</div>
-              <h2 className="text-3xl font-light text-blue-900">{contactData.title}</h2>
+              <div className="text-6xl font-extralight text-slate-200">{contactData.sectionNumber}</div>
+              <h2 className="text-title text-slate-900">{contactData.title}</h2>
             </div>
           </div>
 
           <div className="lg:col-span-9">
-            <div className="grid lg:grid-cols-2 gap-16">
-              <div className="space-y-8">
-                <div className="space-y-6">
-                  <p className="text-lg font-light text-blue-700 leading-relaxed">
+            <div className="grid lg:grid-cols-2 gap-20">
+              <div className="space-y-12">
+                <div className="space-y-8">
+                  <p className="text-body text-slate-600 leading-relaxed">
                     {contactData.description}
                   </p>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {contactData.contactInfo.map((contact, index) => (
-                      <div key={index}>
-                        <div className="text-xs font-mono text-blue-500 uppercase tracking-wider mb-1">
+                      <div key={index} className="space-y-2">
+                        <div className="text-small text-slate-400">
                           {contact.label}
                         </div>
-                        <a href={contact.href} className="text-blue-900 hover:text-blue-700 transition-colors">
+                        <a href={contact.href} className="text-slate-900 hover:text-blue-500 transition-colors text-lg">
                           {contact.value}
                         </a>
                       </div>
@@ -59,7 +59,7 @@ const Contact = () => {
               <div>
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {contactData.form.fields.map((field, index) => (
-                    <div key={index}>
+                    <div key={index} className="space-y-2">
                       {field.type === "textarea" ? (
                         <textarea
                           name={field.name}
@@ -68,7 +68,7 @@ const Contact = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           placeholder={field.placeholder}
-                          className="w-full pb-3 border-0 border-b border-blue-300 focus:border-blue-600 focus:ring-0 bg-transparent text-blue-900 placeholder-blue-400 font-light resize-none"
+                          className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-0 bg-white text-slate-900 placeholder-slate-400 rounded-lg resize-none transition-colors"
                         />
                       ) : (
                         <input
@@ -78,7 +78,7 @@ const Contact = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           placeholder={field.placeholder}
-                          className="w-full pb-3 border-0 border-b border-blue-300 focus:border-blue-600 focus:ring-0 bg-transparent text-blue-900 placeholder-blue-400 font-light"
+                          className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-0 bg-white text-slate-900 placeholder-slate-400 rounded-lg transition-colors"
                         />
                       )}
                     </div>
@@ -86,7 +86,7 @@ const Contact = () => {
 
                   <button
                     type="submit"
-                    className="text-sm font-mono text-blue-900 hover:text-blue-700 transition-colors uppercase tracking-wider border-b border-blue-600 pb-1"
+                    className="px-8 py-4 bg-blue-500 text-white text-small hover:bg-blue-600 transition-colors rounded-lg"
                   >
                     {contactData.form.submitText}
                   </button>

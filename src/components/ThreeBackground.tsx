@@ -1,4 +1,3 @@
-
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
@@ -7,7 +6,7 @@ import * as THREE from 'three';
 
 const ParticleField = () => {
   const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 800;
+  const particleCount = 500;
   
   const [positions, colors] = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
@@ -16,17 +15,17 @@ const ParticleField = () => {
     for (let i = 0; i < particleCount; i++) {
       const phi = Math.acos(-1 + (2 * i) / particleCount);
       const theta = Math.sqrt(particleCount * Math.PI) * phi;
-      const radius = 2 + Math.random() * 3;
+      const radius = 8 + Math.random() * 5;
       
       positions[i * 3] = radius * Math.cos(theta) * Math.sin(phi);
       positions[i * 3 + 1] = radius * Math.sin(theta) * Math.sin(phi);
       positions[i * 3 + 2] = radius * Math.cos(phi);
       
-      // Blue theme colors
-      const blueIntensity = 0.3 + Math.random() * 0.7;
-      colors[i * 3] = 0.1; // R - minimal red
-      colors[i * 3 + 1] = 0.3 + Math.random() * 0.4; // G - some green for cyan tones
-      colors[i * 3 + 2] = blueIntensity; // B - strong blue
+      // Subtle blue particles
+      const blueIntensity = 0.5 + Math.random() * 0.5;
+      colors[i * 3] = 0.2; // R
+      colors[i * 3 + 1] = 0.4; // G
+      colors[i * 3 + 2] = blueIntensity; // B
     }
     
     return [positions, colors];
@@ -34,8 +33,8 @@ const ParticleField = () => {
   
   useFrame((state) => {
     if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.03;
-      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.02) * 0.1;
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
+      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.05;
     }
   });
   
@@ -56,10 +55,10 @@ const ParticleField = () => {
         />
       </bufferGeometry>
       <pointsMaterial 
-        size={0.015} 
+        size={0.008} 
         vertexColors 
         transparent 
-        opacity={0.8}
+        opacity={0.4}
         sizeAttenuation={true}
       />
     </points>
@@ -110,18 +109,19 @@ const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
   
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.2;
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.1;
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
+      meshRef.current.rotation.z = state.clock.elapsedTime * 0.05;
     }
   });
 
   return (
-    <mesh ref={meshRef} position={position} geometry={geometry} scale={0.8}>
+    <mesh ref={meshRef} position={position} scale={1.5}>
+      <torusGeometry args={[1, 0.3, 16, 100]} />
       <meshBasicMaterial 
         wireframe 
-        color="#4169E1" 
+        color="#3b82f6" 
         transparent 
-        opacity={0.7}
+        opacity={0.3}
       />
     </mesh>
   );
@@ -132,167 +132,31 @@ const TorusKnot = ({ position }: { position: [number, number, number] }) => {
   
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.3;
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.4;
-      
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 1.5) * 0.1;
-      meshRef.current.scale.setScalar(scale);
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.15;
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
     }
   });
 
   return (
-    <mesh ref={meshRef} position={position}>
-      <torusKnotGeometry args={[0.6, 0.2, 100, 16, 3, 2]} />
+    <mesh ref={meshRef} position={position} scale={0.8}>
+      <torusKnotGeometry args={[1, 0.3, 100, 16, 3, 2]} />
       <meshBasicMaterial 
         wireframe 
-        color="#0066CC" 
+        color="#60a5fa" 
         transparent 
-        opacity={0.8}
-      />
-    </mesh>
-  );
-};
-
-const KleinBottle = ({ position }: { position: [number, number, number] }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  const geometry = useMemo(() => {
-    const geometry = new THREE.BufferGeometry();
-    const uSegments = 50;
-    const vSegments = 30;
-    const vertices = [];
-    const indices = [];
-    
-    for (let i = 0; i <= uSegments; i++) {
-      for (let j = 0; j <= vSegments; j++) {
-        const u = (i / uSegments) * Math.PI * 2;
-        const v = (j / vSegments) * Math.PI * 2;
-        
-        let x, y, z;
-        
-        if (u < Math.PI) {
-          x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
-          z = -8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
-        } else {
-          x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
-          z = -8 * Math.sin(u);
-        }
-        
-        y = -2 * (1 - Math.cos(u) / 2) * Math.sin(v);
-        
-        vertices.push(x * 0.1, y * 0.1, z * 0.1);
-      }
-    }
-    
-    for (let i = 0; i < uSegments; i++) {
-      for (let j = 0; j < vSegments; j++) {
-        const a = i * (vSegments + 1) + j;
-        const b = a + vSegments + 1;
-        const c = a + 1;
-        const d = b + 1;
-        
-        indices.push(a, b, c);
-        indices.push(b, d, c);
-      }
-    }
-    
-    geometry.setIndex(indices);
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.computeVertexNormals();
-    
-    return geometry;
-  }, []);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.2;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={position} geometry={geometry} scale={0.3}>
-      <meshBasicMaterial 
-        wireframe 
-        color="#1E90FF" 
-        transparent 
-        opacity={0.6}
-      />
-    </mesh>
-  );
-};
-
-const BoySurface = ({ position }: { position: [number, number, number] }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  const geometry = useMemo(() => {
-    const geometry = new THREE.BufferGeometry();
-    const uSegments = 40;
-    const vSegments = 40;
-    const vertices = [];
-    const indices = [];
-    
-    for (let i = 0; i <= uSegments; i++) {
-      for (let j = 0; j <= vSegments; j++) {
-        const u = (i / uSegments) * Math.PI;
-        const v = (j / vSegments) * Math.PI;
-        
-        const x = Math.cos(u) * Math.sin(v) * Math.cos(v/2);
-        const y = Math.sin(u) * Math.sin(v) * Math.cos(v/2);
-        const z = Math.cos(v) * Math.sin(v/2);
-        
-        vertices.push(x, y, z);
-      }
-    }
-    
-    for (let i = 0; i < uSegments; i++) {
-      for (let j = 0; j < vSegments; j++) {
-        const a = i * (vSegments + 1) + j;
-        const b = a + vSegments + 1;
-        const c = a + 1;
-        const d = b + 1;
-        
-        indices.push(a, b, c);
-        indices.push(b, d, c);
-      }
-    }
-    
-    geometry.setIndex(indices);
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.computeVertexNormals();
-    
-    return geometry;
-  }, []);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.25;
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.18;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={position} geometry={geometry} scale={1.2}>
-      <meshBasicMaterial 
-        wireframe 
-        color="#0080FF" 
-        transparent 
-        opacity={0.5}
+        opacity={0.4}
       />
     </mesh>
   );
 };
 
 const WaveGrid = () => {
-  const gridRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
-    const gridSize = 15;
-    const spacing = 0.3;
-    const geometry = new THREE.PlaneGeometry(gridSize * spacing, gridSize * spacing, gridSize - 1, gridSize - 1);
-    
-    return geometry;
+    const gridSize = 20;
+    const spacing = 0.5;
+    return new THREE.PlaneGeometry(gridSize * spacing, gridSize * spacing, gridSize - 1, gridSize - 1);
   }, []);
   
   useFrame((state) => {
@@ -303,33 +167,26 @@ const WaveGrid = () => {
       for (let i = 0; i < positions.count; i++) {
         const x = array[i * 3];
         const z = array[i * 3 + 2];
-        const wave = Math.sin(x * 3 + state.clock.elapsedTime * 0.8) * 
-                    Math.cos(z * 3 + state.clock.elapsedTime * 0.8) * 0.08;
+        const wave = Math.sin(x * 2 + state.clock.elapsedTime * 0.5) * 
+                    Math.cos(z * 2 + state.clock.elapsedTime * 0.5) * 0.3;
         array[i * 3 + 1] = wave;
       }
       positions.needsUpdate = true;
     }
-    
-    if (gridRef.current) {
-      gridRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.08) * 0.1;
-      gridRef.current.position.z = -4;
-    }
   });
   
   return (
-    <group ref={gridRef}>
-      <mesh ref={meshRef} geometry={geometry}>
-        <meshBasicMaterial wireframe color="#336699" transparent opacity={0.3} />
-      </mesh>
-    </group>
+    <mesh ref={meshRef} geometry={geometry} rotation={[-Math.PI / 2, 0, 0]} position={[0, -8, -5]}>
+      <meshBasicMaterial wireframe color="#cbd5e1" transparent opacity={0.2} />
+    </mesh>
   );
 };
 
 const ThreeBackground = () => {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 opacity-60">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
+        camera={{ position: [0, 0, 15], fov: 50 }}
         style={{ background: 'transparent' }}
         gl={{ 
           antialias: true,
@@ -342,22 +199,19 @@ const ThreeBackground = () => {
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.3}
-          maxPolarAngle={Math.PI / 1.8}
-          minPolarAngle={Math.PI / 2.2}
+          autoRotateSpeed={0.2}
+          maxPolarAngle={Math.PI / 1.5}
+          minPolarAngle={Math.PI / 2.5}
         />
         
         <ParticleField />
         <WaveGrid />
         
-        <MobiusStrip position={[-2.5, 1, 0]} />
-        <TorusKnot position={[2.5, -1, 0]} />
-        <KleinBottle position={[0, 2, -1]} />
-        <BoySurface position={[0, -2, 1]} />
+        <MobiusStrip position={[4, 2, 0]} />
+        <TorusKnot position={[4, -2, -2]} />
         
-        <ambientLight intensity={0.4} color="#E6F3FF" />
-        <directionalLight position={[5, 5, 5]} intensity={0.3} color="#4169E1" />
-        <pointLight position={[-5, -5, -5]} intensity={0.2} color="#0080FF" />
+        <ambientLight intensity={0.3} color="#f8fafc" />
+        <directionalLight position={[10, 10, 5]} intensity={0.2} color="#3b82f6" />
       </Canvas>
     </div>
   );
