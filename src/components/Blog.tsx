@@ -1,8 +1,15 @@
 
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import blogData from "@/content/blog/data.json";
 
 const Blog = () => {
+  const navigate = useNavigate();
+
+  const handlePostClick = (slug: string) => {
+    navigate(`/blog/${slug}`);
+  };
+
   return (
     <section id="blog" className="py-16 px-4 bg-gradient-to-br from-white to-slate-50">
       <div className="max-w-6xl mx-auto">
@@ -22,7 +29,8 @@ const Blog = () => {
               {blogData.posts.map((post, index) => (
                 <article 
                   key={post.id} 
-                  className="group bg-white rounded-xl border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-500 overflow-hidden hover:-translate-y-2"
+                  className="group bg-white rounded-xl border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-500 overflow-hidden hover:-translate-y-2 cursor-pointer"
+                  onClick={() => handlePostClick(post.slug)}
                 >
                   <div className="p-6 space-y-4">
                     <div className="space-y-3">
