@@ -14,44 +14,44 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/30 z-5"></div>
       
       <div className="relative z-10 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-6xl mx-auto px-4 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Left Column - Text Content */}
-            <div className="space-y-12">
-              <div className="space-y-8">
-                <div className="text-small text-blue-300 tracking-wider">
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <div className="text-small text-blue-300 tracking-wider font-departure">
                   {heroData.subtitle}
                 </div>
                 
-                <div className="space-y-4">
-                  <h1 className="text-display text-white leading-none">
+                <div className="space-y-2">
+                  <h1 className="text-display text-white leading-none font-departure">
                     {heroData.title.firstName}
                   </h1>
-                  <h1 className="text-display text-blue-400 leading-none">
+                  <h1 className="text-display text-blue-400 leading-none font-departure">
                     {heroData.title.lastName}
                   </h1>
                 </div>
                 
-                <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
                 
-                <p className="text-body text-slate-300 max-w-lg leading-relaxed">
+                <p className="text-body text-slate-300 max-w-md leading-relaxed font-departure">
                   {heroData.description}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-8 border-t border-slate-700/50">
-                <div className="flex items-center gap-4">
-                  <div className={`w-3 h-3 ${heroData.status.available ? 'bg-green-400' : 'bg-red-400'} rounded-full animate-pulse`}></div>
-                  <span className="text-small text-slate-400">
+              <div className="flex items-center justify-between pt-6 border-t border-slate-700/50">
+                <div className="flex items-center gap-3">
+                  <div className={`w-2 h-2 ${heroData.status.available ? 'bg-green-400' : 'bg-red-400'} rounded-full animate-pulse`}></div>
+                  <span className="text-small text-slate-400 font-departure">
                     {heroData.status.text}
                   </span>
                 </div>
                 
                 <div className="text-right space-y-1">
-                  <div className="text-small text-slate-400">
+                  <div className="text-small text-slate-400 font-departure">
                     {heroData.location.city}
                   </div>
-                  <div className="text-xs text-slate-500">{heroData.location.timezone}</div>
+                  <div className="text-xs text-slate-500 font-departure">{heroData.location.timezone}</div>
                 </div>
               </div>
             </div>

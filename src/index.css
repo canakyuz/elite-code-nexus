@@ -33,7 +33,7 @@
     --input: 226 232 240;
     --ring: 59 130 246;
 
-    --radius: 8px;
+    --radius: 6px;
   }
 
   .dark {
@@ -73,37 +73,37 @@
   }
 
   body {
-    @apply bg-background text-foreground font-light;
+    @apply bg-background text-foreground font-departure;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     min-height: 100vh;
   }
 
-  /* Custom typography */
+  /* Custom typography with compact approach */
   .text-display {
-    font-size: clamp(4rem, 12vw, 10rem);
-    line-height: 0.85;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
     font-weight: 300;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.03em;
   }
 
   .text-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.1;
-    font-weight: 300;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   .text-body {
-    font-size: 1.125rem;
-    line-height: 1.7;
+    font-size: 0.875rem;
+    line-height: 1.5;
     font-weight: 300;
   }
 
   .text-small {
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: 0.75rem;
+    line-height: 1.4;
     font-weight: 400;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
   }
 }
