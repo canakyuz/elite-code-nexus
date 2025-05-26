@@ -1,6 +1,5 @@
-
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, List, FileText, Copy, Check } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, List, BookOpen, Copy, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import blogData from "@/content/blog/data.json";
 import { Button } from "@/components/ui/button";
@@ -297,7 +296,7 @@ describe('UserProfile', () => {
           }, 2000);
         });
         
-        block.style.position = 'relative';
+        (block as HTMLElement).style.position = 'relative';
         block.appendChild(copyButton);
       }
     });
@@ -497,7 +496,7 @@ describe('UserProfile', () => {
       
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         .code-block {
           background: linear-gradient(145deg, #1e293b, #334155);
           border: 1px solid #475569;
