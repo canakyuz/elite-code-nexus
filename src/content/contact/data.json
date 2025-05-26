@@ -1,8 +1,8 @@
 
 {
   "sectionNumber": "04",
-  "title": "Contact",
-  "description": "Let's work together on new projects and collaboration opportunities. I respond to every message within 24 hours.",
+  "title": "İletişim",
+  "description": "Yeni projeler, işbirlikleri veya teknik konularda görüş alışverişi için benimle iletişime geçebilirsiniz. Her mesaja 24 saat içinde yanıt veriyorum.",
   "contactInfo": [
     {
       "label": "Email",
@@ -12,7 +12,12 @@
     {
       "label": "LinkedIn",
       "value": "linkedin.com/in/canakyuz",
-      "href": "#"
+      "href": "https://linkedin.com/in/canakyuz"
+    },
+    {
+      "label": "GitHub",
+      "value": "github.com/canakyuz",
+      "href": "https://github.com/canakyuz"
     }
   ],
   "form": {
@@ -20,23 +25,29 @@
       {
         "name": "name",
         "type": "text",
-        "placeholder": "Name",
+        "placeholder": "Adınız",
         "required": true
       },
       {
         "name": "email",
         "type": "email",
-        "placeholder": "Email",
+        "placeholder": "E-posta adresiniz",
         "required": true
+      },
+      {
+        "name": "project",
+        "type": "text",
+        "placeholder": "Proje/Konu (opsiyonel)",
+        "required": false
       },
       {
         "name": "message",
         "type": "textarea",
-        "placeholder": "Message",
+        "placeholder": "Mesajınız",
         "required": true,
         "rows": 4
       }
     ],
-    "submitText": "Send Message"
+    "submitText": "Mesaj Gönder"
   }
 }

@@ -1,24 +1,25 @@
 
 {
   "sectionNumber": "01",
-  "title": "About",
-  "mainDescription": "I'm a senior software engineer and entrepreneur with over 10 years of experience building innovative digital solutions.",
+  "title": "Hakkımda",
+  "mainDescription": "Matematik doktora geçmişi ile yazılım mimarisi arasında köprü kuran, mikroservis altyapıları ve yapay zeka entegrasyonları konusunda uzmanlaşmış geliştirici ve girişimci.",
   "detailedDescription": [
-    "Since 2014, I've been exploring the power of technology, learning something new every day, and transforming complex problems into elegant solutions.",
-    "I've founded 5 different technology companies, touching the lives of millions of users and gaining deep experience in both technical and business development."
+    "Akademik kariyerime matematik alanında başladım ve doktora çalışmalarım sırasında algoritma geliştirme ve problem çözme becerilerimi derinleştirdim. Bu güçlü matematik altyapısı, yazılım geliştirme süreçlerimde karmaşık problemleri sistematik yaklaşımlarla çözmeme olanak sağlıyor.",
+    "Son yıllarda mikroservis mimarileri, ölçeklenebilir backend sistemleri ve yapay zeka entegrasyonları üzerine odaklandım. NexFit, NexPanel, Atlas AI gibi projelerimde hem teknik derinlik hem de kullanıcı deneyimi odaklı çözümler geliştiriyorum.",
+    "Hedefim, global ölçekte etkili olabilecek, teknik açıdan sağlam ve kullanıcı ihtiyaçlarını tam olarak karşılayan ürünler yaratmak. Her projemde öğrendiğim deneyimleri bir sonraki adımda daha büyük çözümlere dönüştürmeye odaklanıyorum."
   ],
   "highlights": [
     {
+      "number": "5+",
+      "label": "Aktif SaaS Projesi"
+    },
+    {
       "number": "10+",
-      "label": "Years Experience"
+      "label": "Yıl Yazılım Deneyimi"
     },
     {
-      "number": "5",
-      "label": "Companies Founded"
-    },
-    {
-      "number": "1M+",
-      "label": "Users Impacted"
+      "number": "100K+",
+      "label": "Kullanıcıya Ulaşan Çözümler"
     }
   ]
 }

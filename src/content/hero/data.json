@@ -4,14 +4,14 @@
     "firstName": "CAN",
     "lastName": "AKYÜZ"
   },
-  "subtitle": "SOFTWARE ENGINEER",
-  "description": "Senior software engineer and entrepreneur creating digital experiences that matter.",
+  "subtitle": "YAZILIM MİMARİ & GİRİŞİMCİ",
+  "description": "Matematik geçmişi ile yazılım dünyasında ölçeklenebilir çözümler geliştiren, yapay zeka entegrasyonları ile global problemlere teknik derinlikle yaklaşan ürün odaklı geliştirici.",
   "status": {
-    "text": "Available for projects",
+    "text": "Yeni projeler için müsait",
     "available": true
   },
   "location": {
-    "city": "Istanbul, Turkey",
+    "city": "İstanbul, Türkiye",
     "timezone": "UTC+3"
   }
 }

@@ -1,31 +1,31 @@
 
 {
-  "sectionNumber": "03",
-  "title": "Selected Work",
+  "sectionNumber": "02",
+  "title": "Projeler",
   "projects": [
     {
-      "title": "E-Commerce Platform",
+      "title": "NexFit",
       "year": "2024",
-      "description": "Microservice architecture serving 100K+ daily users with modern e-commerce solutions.",
-      "technologies": ["React", "Node.js", "PostgreSQL", "AWS"]
+      "description": "Mikroservis mimarisi ile geliştirilmiş fitness platformu. Kullanıcı yönetimi, egzersiz programlama ve ödeme sistemleri entegrasyonu.",
+      "technologies": ["Node.js", "React", "PostgreSQL", "Mikroservisler", "Stripe API"]
     },
     {
-      "title": "FinTech Mobile App",
-      "year": "2023", 
-      "description": "Secure payment system and portfolio management using blockchain technology.",
-      "technologies": ["React Native", "Python", "Blockchain"]
+      "title": "Atlas AI",
+      "year": "2024", 
+      "description": "Tamamen yerel çalışan, güvenlik odaklı yapay zeka asistanı. Kullanıcı verilerini koruyan, özelleştirilebilir AI çözümü.",
+      "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"]
     },
     {
-      "title": "AI SaaS Platform",
+      "title": "NexPanel",
       "year": "2023",
-      "description": "AI-powered platform automating business processes and increasing efficiency by 300%.",
-      "technologies": ["Next.js", "Python", "TensorFlow"]
+      "description": "Multi-tenant panel mimarisi ile özelleştirilebilir modüler yönetim sistemi. SaaS ürünler için ölçeklenebilir altyapı.",
+      "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modüler Mimari"]
     },
     {
-      "title": "Developer Tools Suite",
-      "year": "2022",
-      "description": "Open-source tools package simplifying developers' work. 10K+ stars on GitHub.",
-      "technologies": ["TypeScript", "Node.js", "CLI"]
+      "title": "NexCV & NexBook",
+      "year": "2023",
+      "description": "AI destekli CV oluşturucu ve randevu yönetim sistemi. SaaS modeli ile müşteri odaklı çözümler.",
+      "technologies": ["React", "AI/ML", "SaaS", "Customer Management"]
     }
   ]
 }

@@ -1,9 +1,8 @@
-
 import skillsData from "@/content/skills/data.json";
 
 const Skills = () => {
   return (
-    <section className="py-32 px-6 bg-slate-50">
+    <section id="skills" className="py-32 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-20">
           <div className="lg:col-span-3 space-y-8">

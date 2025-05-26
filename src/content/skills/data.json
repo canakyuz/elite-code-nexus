@@ -1,23 +1,23 @@
 
 {
-  "sectionNumber": "02",
-  "title": "Skills",
+  "sectionNumber": "03",
+  "title": "Uzmanlık Alanları",
   "categories": [
     {
-      "title": "Frontend",
-      "skills": ["React", "Next.js", "TypeScript", "Vue.js", "Tailwind CSS"]
+      "title": "Backend Mimarisi",
+      "skills": ["Mikroservisler", "Node.js", "Python", "PostgreSQL", "Redis", "API Gateway"]
     },
     {
-      "title": "Backend", 
-      "skills": ["Node.js", "Python", "Go", "PostgreSQL", "MongoDB"]
+      "title": "Yapay Zeka & ML", 
+      "skills": ["TensorFlow", "Local LLM", "AI Entegrasyonu", "Privacy-First AI", "Algorithm Design"]
     },
     {
-      "title": "DevOps",
-      "skills": ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"]
+      "title": "Frontend & UI/UX",
+      "skills": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Responsive Design"]
     },
     {
-      "title": "Mobile",
-      "skills": ["React Native", "Flutter", "iOS", "Android"]
+      "title": "DevOps & Ölçeklendirme",
+      "skills": ["Docker", "AWS", "CI/CD", "Multi-tenant", "Performance Optimization"]
     }
   ]
 }
