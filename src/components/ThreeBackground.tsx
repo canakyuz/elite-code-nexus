@@ -70,16 +70,40 @@ const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
-    const geometry = new THREE.ParametricGeometry((u, v, target) => {
-      u *= Math.PI * 2;
-      v = (v - 0.5) * 0.3;
-      
-      const x = (1 + v * Math.cos(u / 2)) * Math.cos(u);
-      const y = (1 + v * Math.cos(u / 2)) * Math.sin(u);
-      const z = v * Math.sin(u / 2);
-      
-      target.set(x, y, z);
-    }, 100, 20);
+    const geometry = new THREE.BufferGeometry();
+    const uSegments = 100;
+    const vSegments = 20;
+    const vertices = [];
+    const indices = [];
+    
+    for (let i = 0; i <= uSegments; i++) {
+      for (let j = 0; j <= vSegments; j++) {
+        const u = (i / uSegments) * Math.PI * 2;
+        const v = ((j / vSegments) - 0.5) * 0.3;
+        
+        const x = (1 + v * Math.cos(u / 2)) * Math.cos(u);
+        const y = (1 + v * Math.cos(u / 2)) * Math.sin(u);
+        const z = v * Math.sin(u / 2);
+        
+        vertices.push(x, y, z);
+      }
+    }
+    
+    for (let i = 0; i < uSegments; i++) {
+      for (let j = 0; j < vSegments; j++) {
+        const a = i * (vSegments + 1) + j;
+        const b = a + vSegments + 1;
+        const c = a + 1;
+        const d = b + 1;
+        
+        indices.push(a, b, c);
+        indices.push(b, d, c);
+      }
+    }
+    
+    geometry.setIndex(indices);
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();
     
     return geometry;
   }, []);
@@ -133,25 +157,48 @@ const KleinBottle = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
-    const geometry = new THREE.ParametricGeometry((u, v, target) => {
-      u *= Math.PI * 2;
-      v *= Math.PI * 2;
-      
-      const a = 2;
-      let x, y, z;
-      
-      if (u < Math.PI) {
-        x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
-        z = -8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
-      } else {
-        x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
-        z = -8 * Math.sin(u);
+    const geometry = new THREE.BufferGeometry();
+    const uSegments = 50;
+    const vSegments = 30;
+    const vertices = [];
+    const indices = [];
+    
+    for (let i = 0; i <= uSegments; i++) {
+      for (let j = 0; j <= vSegments; j++) {
+        const u = (i / uSegments) * Math.PI * 2;
+        const v = (j / vSegments) * Math.PI * 2;
+        
+        let x, y, z;
+        
+        if (u < Math.PI) {
+          x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(u) * Math.cos(v);
+          z = -8 * Math.sin(u) - 2 * (1 - Math.cos(u) / 2) * Math.sin(u) * Math.cos(v);
+        } else {
+          x = 3 * Math.cos(u) * (1 + Math.sin(u)) + (2 * (1 - Math.cos(u) / 2)) * Math.cos(v + Math.PI);
+          z = -8 * Math.sin(u);
+        }
+        
+        y = -2 * (1 - Math.cos(u) / 2) * Math.sin(v);
+        
+        vertices.push(x * 0.1, y * 0.1, z * 0.1);
       }
-      
-      y = -2 * (1 - Math.cos(u) / 2) * Math.sin(v);
-      
-      target.set(x * 0.1, y * 0.1, z * 0.1);
-    }, 50, 30);
+    }
+    
+    for (let i = 0; i < uSegments; i++) {
+      for (let j = 0; j < vSegments; j++) {
+        const a = i * (vSegments + 1) + j;
+        const b = a + vSegments + 1;
+        const c = a + 1;
+        const d = b + 1;
+        
+        indices.push(a, b, c);
+        indices.push(b, d, c);
+      }
+    }
+    
+    geometry.setIndex(indices);
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();
     
     return geometry;
   }, []);
@@ -179,16 +226,40 @@ const BoySurface = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
-    const geometry = new THREE.ParametricGeometry((u, v, target) => {
-      u = u * Math.PI;
-      v = v * Math.PI;
-      
-      const x = Math.cos(u) * Math.sin(v) * Math.cos(v/2);
-      const y = Math.sin(u) * Math.sin(v) * Math.cos(v/2);
-      const z = Math.cos(v) * Math.sin(v/2);
-      
-      target.set(x, y, z);
-    }, 40, 40);
+    const geometry = new THREE.BufferGeometry();
+    const uSegments = 40;
+    const vSegments = 40;
+    const vertices = [];
+    const indices = [];
+    
+    for (let i = 0; i <= uSegments; i++) {
+      for (let j = 0; j <= vSegments; j++) {
+        const u = (i / uSegments) * Math.PI;
+        const v = (j / vSegments) * Math.PI;
+        
+        const x = Math.cos(u) * Math.sin(v) * Math.cos(v/2);
+        const y = Math.sin(u) * Math.sin(v) * Math.cos(v/2);
+        const z = Math.cos(v) * Math.sin(v/2);
+        
+        vertices.push(x, y, z);
+      }
+    }
+    
+    for (let i = 0; i < uSegments; i++) {
+      for (let j = 0; j < vSegments; j++) {
+        const a = i * (vSegments + 1) + j;
+        const b = a + vSegments + 1;
+        const c = a + 1;
+        const d = b + 1;
+        
+        indices.push(a, b, c);
+        indices.push(b, d, c);
+      }
+    }
+    
+    geometry.setIndex(indices);
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals();
     
     return geometry;
   }, []);
