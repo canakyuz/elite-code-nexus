@@ -5,8 +5,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import blogData from "@/content/blog/data.json";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -31,6 +31,7 @@ const BlogDetail = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string>("");
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const post = blogData.posts.find(p => p.slug === slug);
 
@@ -42,6 +43,13 @@ const BlogDetail = () => {
     acc[post.category].push(post);
     return acc;
   }, {} as Record<string, BlogPost[]>);
+
+  // Set initial selected category
+  useEffect(() => {
+    if (!selectedCategory && Object.keys(groupedPosts).length > 0) {
+      setSelectedCategory(Object.keys(groupedPosts)[0]);
+    }
+  }, [groupedPosts, selectedCategory]);
 
   // Enhanced content sections
   const contentSections = [
@@ -275,66 +283,72 @@ const ExpensiveComponent = memo(({ data, filter }) => {
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Ana Sayfaya Dön
               </Button>
-              <h2 className="text-lg font-semibold text-gray-900">Tüm Yazılar</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Tüm Yazılar</h2>
+              
+              {/* Category Badges */}
+              <div className="mb-6">
+                <ScrollArea className="w-full">
+                  <div className="flex gap-2 pb-2">
+                    {Object.keys(groupedPosts).map(category => (
+                      <Badge
+                        key={category}
+                        variant={selectedCategory === category ? "default" : "outline"}
+                        className={`cursor-pointer whitespace-nowrap transition-all hover:shadow-sm ${
+                          selectedCategory === category 
+                            ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                            : 'text-gray-700 hover:text-blue-600 hover:border-blue-300'
+                        }`}
+                        onClick={() => setSelectedCategory(category)}
+                      >
+                        {category}
+                      </Badge>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </div>
             </div>
             
             <ScrollArea className="h-full pb-20">
               <div className="p-6">
-                <Tabs defaultValue={Object.keys(groupedPosts)[0]} className="w-full">
-                  <TabsList className="grid w-full grid-cols-3 gap-1 mb-6 h-auto p-1 bg-gray-100">
-                    {Object.keys(groupedPosts).map(category => (
-                      <TabsTrigger 
-                        key={category} 
-                        value={category} 
-                        className="text-xs py-2 px-3 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm"
-                      >
-                        {category}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                  
-                  {Object.entries(groupedPosts).map(([category, posts]) => (
-                    <TabsContent key={category} value={category} className="space-y-3">
-                      {posts.map(blogPost => (
-                        <div 
-                          key={blogPost.id}
-                          onClick={() => navigate(`/blog/${blogPost.slug}`)}
-                          className={`p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md ${
-                            blogPost.slug === slug 
-                              ? 'bg-blue-50 border-blue-200 shadow-sm' 
-                              : 'bg-white border-gray-200 hover:border-gray-300'
-                          }`}
-                        >
-                          <h3 className={`font-medium text-sm mb-2 line-clamp-2 ${
-                            blogPost.slug === slug ? 'text-blue-900' : 'text-gray-900'
-                          }`}>
-                            {blogPost.title}
-                          </h3>
-                          <p className={`text-xs mb-3 line-clamp-2 ${
-                            blogPost.slug === slug ? 'text-blue-700' : 'text-gray-600'
-                          }`}>
-                            {blogPost.excerpt}
-                          </p>
-                          <div className={`flex items-center gap-3 text-xs ${
-                            blogPost.slug === slug ? 'text-blue-600' : 'text-gray-500'
-                          }`}>
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-3 h-3" />
-                              {new Date(blogPost.publishDate).toLocaleDateString('tr-TR', {
-                                month: 'short',
-                                day: 'numeric'
-                              })}
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="w-3 h-3" />
-                              {blogPost.readTime}
-                            </div>
-                          </div>
+                <div className="space-y-3">
+                  {selectedCategory && groupedPosts[selectedCategory]?.map(blogPost => (
+                    <div 
+                      key={blogPost.id}
+                      onClick={() => navigate(`/blog/${blogPost.slug}`)}
+                      className={`p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md ${
+                        blogPost.slug === slug 
+                          ? 'bg-blue-50 border-blue-200 shadow-sm' 
+                          : 'bg-white border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <h3 className={`font-medium text-sm mb-2 line-clamp-2 ${
+                        blogPost.slug === slug ? 'text-blue-900' : 'text-gray-900'
+                      }`}>
+                        {blogPost.title}
+                      </h3>
+                      <p className={`text-xs mb-3 line-clamp-2 ${
+                        blogPost.slug === slug ? 'text-blue-700' : 'text-gray-600'
+                      }`}>
+                        {blogPost.excerpt}
+                      </p>
+                      <div className={`flex items-center gap-3 text-xs ${
+                        blogPost.slug === slug ? 'text-blue-600' : 'text-gray-500'
+                      }`}>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(blogPost.publishDate).toLocaleDateString('tr-TR', {
+                            month: 'short',
+                            day: 'numeric'
+                          })}
                         </div>
-                      ))}
-                    </TabsContent>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {blogPost.readTime}
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </Tabs>
+                </div>
               </div>
             </ScrollArea>
           </div>
