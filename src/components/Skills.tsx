@@ -5,7 +5,7 @@ const Skills = () => {
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-3 space-y-4">
             <div className="space-y-3">
-              <div className="text-3xl font-extralight text-blue-100 leading-none font-departure">{skillsData.sectionNumber}</div>
+              <div className="text-4xl font-extralight text-blue-100 leading-none font-departure">{skillsData.sectionNumber}</div>
               <h2 className="text-title text-slate-900 relative font-departure">
                 {skillsData.title}
                 <div className="absolute -bottom-1 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
