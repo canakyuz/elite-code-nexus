@@ -9,40 +9,23 @@
       "year": "2024",
       "description": "Fitness platform developed with microservice architecture. User management, exercise programming, and payment system integrations.",
       "technologies": ["Node.js", "React", "PostgreSQL", "Microservices", "Stripe API"],
-      "blogContent": {
-        "title": "Building NexFit: A Modern Fitness Platform",
-        "publishDate": "2024-03-15",
-        "readTime": "8 min read",
-        "content": [
-          {
-            "type": "paragraph",
-            "text": "The NexFit project is a comprehensive platform developed to meet the needs of the modern fitness industry. We created a scalable and modular solution using microservice architecture."
-          },
-          {
-            "type": "heading",
-            "text": "Technology Choices"
-          },
-          {
-            "type": "paragraph",
-            "text": "We used Node.js and Express.js for the backend, while choosing PostgreSQL as the database. We developed a modern user interface with React on the frontend."
-          },
-          {
-            "type": "heading",
-            "text": "Microservice Architecture"
-          },
-          {
-            "type": "paragraph",
-            "text": "We divided our system into four main microservices: user management, exercise programming, payment system, and reporting. This approach provided us with great flexibility."
-          },
-          {
-            "type": "heading",
-            "text": "Challenges We Faced"
-          },
-          {
-            "type": "paragraph",
-            "text": "One of the biggest challenges was optimizing inter-microservice communication. We solved this problem by using Redis cache system and API Gateway."
-          }
-        ]
+      "links": {
+        "github": "https://github.com/username/nexfit",
+        "demo": "https://nexfit-demo.vercel.app",
+        "documentation": "https://nexfit-docs.gitbook.io"
+      },
+      "features": [
+        "Microservice Architecture",
+        "User Authentication & Management",
+        "Exercise Programming System",
+        "Payment Integration with Stripe",
+        "Real-time Progress Tracking"
+      ],
+      "overview": "NexFit is a comprehensive fitness platform built with modern microservice architecture. The system provides scalable solutions for fitness centers and personal trainers.",
+      "techStack": {
+        "backend": ["Node.js", "Express.js", "PostgreSQL", "Redis"],
+        "frontend": ["React", "TypeScript", "Tailwind CSS"],
+        "infrastructure": ["Docker", "AWS", "Microservices"]
       }
     },
     {
@@ -51,32 +34,22 @@
       "year": "2024", 
       "description": "Fully local, security-focused AI assistant. Privacy-preserving, customizable AI solution that protects user data.",
       "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"],
-      "blogContent": {
-        "title": "Atlas AI: Privacy-First AI Assistant",
-        "publishDate": "2024-02-20",
-        "readTime": "6 min read",
-        "content": [
-          {
-            "type": "paragraph",
-            "text": "Atlas AI is an artificial intelligence assistant that maintains the highest level of user privacy and operates completely locally. This solution, where data is not sent to cloud servers, is ideal for corporate security requirements."
-          },
-          {
-            "type": "heading",
-            "text": "Privacy-Focused Design"
-          },
-          {
-            "type": "paragraph",
-            "text": "All AI computations are performed on the user's own device. No data is sent to external servers, ensuring complete privacy guarantee."
-          },
-          {
-            "type": "heading",
-            "text": "Technical Infrastructure"
-          },
-          {
-            "type": "paragraph",
-            "text": "We developed optimized local LLM models using Python and TensorFlow. We created a cross-platform desktop application with Electron."
-          }
-        ]
+      "links": {
+        "github": "https://github.com/username/atlas-ai",
+        "documentation": "https://atlas-ai-docs.netlify.app"
+      },
+      "features": [
+        "100% Local Processing",
+        "Privacy-First Design",
+        "Customizable AI Models",
+        "Cross-platform Desktop App",
+        "Offline Functionality"
+      ],
+      "overview": "Atlas AI is a privacy-focused artificial intelligence assistant that runs completely locally on your device, ensuring your data never leaves your machine.",
+      "techStack": {
+        "ai": ["TensorFlow", "Local LLM", "ONNX"],
+        "desktop": ["Electron", "TypeScript"],
+        "backend": ["Python", "FastAPI"]
       }
     },
     {
@@ -85,32 +58,23 @@
       "year": "2023",
       "description": "Customizable modular management system with multi-tenant panel architecture. Scalable infrastructure for SaaS products.",
       "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modular Architecture"],
-      "blogContent": {
-        "title": "NexPanel: Modular SaaS Management System",
-        "publishDate": "2023-11-10",
-        "readTime": "10 min read",
-        "content": [
-          {
-            "type": "paragraph",
-            "text": "NexPanel is a modular and multi-tenant management panel system developed for SaaS products. It stands out with its customizable structure according to different customer needs."
-          },
-          {
-            "type": "heading",
-            "text": "Multi-Tenant Architecture"
-          },
-          {
-            "type": "paragraph",
-            "text": "We designed an intelligent architecture where each customer has their own isolated environment but shares the same codebase."
-          },
-          {
-            "type": "heading",
-            "text": "Modular Structure"
-          },
-          {
-            "type": "paragraph",
-            "text": "The system consists of modules that can be activated/deactivated according to customer needs. This way, each customer uses only the features they need."
-          }
-        ]
+      "links": {
+        "github": "https://github.com/username/nexpanel",
+        "demo": "https://nexpanel-demo.vercel.app",
+        "documentation": "https://nexpanel.docs.dev"
+      },
+      "features": [
+        "Multi-tenant Architecture",
+        "Modular System Design",
+        "Custom Dashboard Builder",
+        "Role-based Access Control",
+        "API Management"
+      ],
+      "overview": "NexPanel is a modular SaaS management system that provides customizable admin panels for different client needs with multi-tenant architecture.",
+      "techStack": {
+        "frontend": ["Next.js", "TypeScript", "Tailwind CSS"],
+        "backend": ["Node.js", "Prisma", "PostgreSQL"],
+        "deployment": ["Vercel", "Docker"]
       }
     },
     {
@@ -119,32 +83,23 @@
       "year": "2023",
       "description": "AI-powered CV builder and appointment management system. Customer-focused solutions with SaaS model.",
       "technologies": ["React", "AI/ML", "SaaS", "Customer Management"],
-      "blogContent": {
-        "title": "NexCV & NexBook: AI-Powered Business Solutions",
-        "publishDate": "2023-09-05",
-        "readTime": "7 min read",
-        "content": [
-          {
-            "type": "paragraph",
-            "text": "NexCV and NexBook were developed as AI-powered CV creation and appointment management systems. They offer integrated solutions for two different needs."
-          },
-          {
-            "type": "heading",
-            "text": "AI-Powered CV Builder"
-          },
-          {
-            "type": "paragraph",
-            "text": "NexCV allows users to create professional CVs with AI assistance. It offers industry-standard designs and content suggestions."
-          },
-          {
-            "type": "heading",
-            "text": "Smart Appointment System"
-          },
-          {
-            "type": "paragraph",
-            "text": "NexBook automates business appointment processes. AI that learns customer preferences suggests the most suitable appointment times."
-          }
-        ]
+      "links": {
+        "github": "https://github.com/username/nexcv-nexbook",
+        "demo": "https://nexcv.app",
+        "documentation": "https://nexcv-docs.vercel.app"
+      },
+      "features": [
+        "AI-powered CV Generation",
+        "Smart Appointment Scheduling",
+        "Template Customization",
+        "Export to Multiple Formats",
+        "Customer Management System"
+      ],
+      "overview": "NexCV & NexBook combines AI-powered CV creation with intelligent appointment management, providing integrated business solutions.",
+      "techStack": {
+        "frontend": ["React", "TypeScript", "Material-UI"],
+        "ai": ["OpenAI API", "Natural Language Processing"],
+        "backend": ["Node.js", "MongoDB", "Express"]
       }
     }
   ]
