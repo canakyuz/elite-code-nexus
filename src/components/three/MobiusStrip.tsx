@@ -1,4 +1,3 @@
-
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -61,12 +60,12 @@ const MobiusStrip = () => {
   });
 
   return (
-    <group position={[1.5, 1.8, 1.5]} scale={1.4}>
+    <group position={[0, 2, 0]} scale={0.8}>
       <mesh ref={mobiusRef} geometry={mobiusGeometry}>
         <meshLambertMaterial 
           color="#8b5cf6"
           transparent 
-          opacity={0.95}
+          opacity={0.7}
           side={THREE.DoubleSide}
           emissive="#4c1d95"
           emissiveIntensity={0.1}

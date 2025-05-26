@@ -1,4 +1,3 @@
-
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -84,19 +83,19 @@ const WorldGlobe = () => {
   });
 
   return (
-    <group ref={globeRef} position={[4, 0, 0]}>
-      {/* Base globe wireframe */}
+    <group ref={globeRef} position={[0, 0, 0]}>
+      {/* Base globe wireframe with glow */}
       <mesh>
-        <sphereGeometry args={[1.15, 32, 32]} />
+        <sphereGeometry args={[1.15, 64, 64]} />
         <meshBasicMaterial 
           wireframe 
-          color="#0ea5e9" 
+          color="#00d4ff" 
           transparent 
-          opacity={0.25} 
+          opacity={0.6} 
         />
       </mesh>
       
-      {/* World outline points */}
+      {/* World outline points - brighter */}
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -107,21 +106,31 @@ const WorldGlobe = () => {
           />
         </bufferGeometry>
         <pointsMaterial 
-          size={0.025} 
-          color="#0ea5e9" 
+          size={0.035} 
+          color="#00ffff" 
           transparent 
-          opacity={0.6}
+          opacity={0.9}
           sizeAttenuation={true}
         />
       </points>
       
-      {/* Inner glow */}
+      {/* Inner glow - brighter */}
       <mesh>
-        <sphereGeometry args={[1.0, 16, 16]} />
+        <sphereGeometry args={[1.0, 32, 32]} />
         <meshBasicMaterial 
-          color="#0ea5e9" 
+          color="#00d4ff" 
           transparent 
-          opacity={0.08}
+          opacity={0.2}
+        />
+      </mesh>
+      
+      {/* Outer glow effect */}
+      <mesh>
+        <sphereGeometry args={[1.3, 32, 32]} />
+        <meshBasicMaterial 
+          color="#0099cc" 
+          transparent 
+          opacity={0.1}
         />
       </mesh>
     </group>

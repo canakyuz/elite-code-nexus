@@ -7,9 +7,9 @@ import FloatingParticles from './three/FloatingParticles';
 
 const ThreeBackground = () => {
   return (
-    <div className="absolute inset-0 z-0 opacity-90">
+    <div className="fixed top-0 right-0 w-1/2 h-screen z-0 opacity-90">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: [0, 0, 5], fov: 50 }}
         style={{ background: 'transparent' }}
         gl={{ 
           antialias: true,
@@ -19,21 +19,25 @@ const ThreeBackground = () => {
         }}
       >
         <OrbitControls
-          enableZoom={false}
+          enableZoom={true}
           enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.3}
-          maxPolarAngle={Math.PI / 1.5}
-          minPolarAngle={Math.PI / 2.5}
+          autoRotate={false}
+          maxDistance={8}
+          minDistance={3}
         />
         
         <FloatingParticles />
         <WorldGlobe />
         <MobiusStrip />
         
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 5, 5]} intensity={0.5} color="#ffffff" />
-        <pointLight position={[-3, 3, 3]} intensity={0.3} color="#0ea5e9" />
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
+        <pointLight position={[-3, 3, 3]} intensity={0.6} color="#0ea5e9" />
+        <hemisphereLight 
+          color="#ffffff"
+          groundColor="#0ea5e9"
+          intensity={0.4}
+        />
       </Canvas>
     </div>
   );
