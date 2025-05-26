@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, List, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -282,12 +281,12 @@ const ExpensiveComponent = memo(({ data, filter }) => {
             <ScrollArea className="h-full pb-20">
               <div className="p-6">
                 <Tabs defaultValue={Object.keys(groupedPosts)[0]} className="w-full">
-                  <TabsList className="grid w-full grid-cols-3 mb-6">
+                  <TabsList className="grid w-full grid-cols-3 gap-1 mb-6 h-auto p-1 bg-gray-100">
                     {Object.keys(groupedPosts).map(category => (
                       <TabsTrigger 
                         key={category} 
                         value={category} 
-                        className="text-xs"
+                        className="text-xs py-2 px-3 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm"
                       >
                         {category}
                       </TabsTrigger>
