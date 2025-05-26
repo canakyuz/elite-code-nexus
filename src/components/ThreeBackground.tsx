@@ -59,10 +59,10 @@ const WorldGlobe = () => {
       const theta = (coord.lng + 180) * (Math.PI / 180);
       
       // Add multiple points around each coordinate for density
-      for (let i = 0; i < 5; i++) {
-        const offsetPhi = phi + (Math.random() - 0.5) * 0.1;
-        const offsetTheta = theta + (Math.random() - 0.5) * 0.1;
-        const offsetRadius = radius + (Math.random() - 0.5) * 0.05;
+      for (let i = 0; i < 3; i++) {
+        const offsetPhi = phi + (Math.random() - 0.5) * 0.05;
+        const offsetTheta = theta + (Math.random() - 0.5) * 0.05;
+        const offsetRadius = radius + (Math.random() - 0.5) * 0.02;
         
         points.push(
           offsetRadius * Math.sin(offsetPhi) * Math.cos(offsetTheta),
@@ -74,43 +74,6 @@ const WorldGlobe = () => {
     
     return new Float32Array(points);
   }, []);
-
-  const connections = useMemo(() => {
-    const lines = [];
-    const connectionPairs = [
-      // Major flight routes and connections
-      [0, 15], [15, 30], [30, 45], [45, 60], [60, 75], [75, 90],
-      [5, 35], [35, 65], [65, 95], [10, 40], [40, 70], [70, 100],
-      [20, 50], [50, 80], [80, 110], [25, 55], [55, 85], [85, 115],
-    ];
-    
-    connectionPairs.forEach(([from, to]) => {
-      if (from * 15 < worldPoints.length && to * 15 < worldPoints.length) {
-        const points = [
-          new THREE.Vector3(
-            worldPoints[from * 15],
-            worldPoints[from * 15 + 1],
-            worldPoints[from * 15 + 2]
-          ),
-          new THREE.Vector3(
-            worldPoints[to * 15],
-            worldPoints[to * 15 + 1],
-            worldPoints[to * 15 + 2]
-          )
-        ];
-        
-        const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        const material = new THREE.LineBasicMaterial({ 
-          color: new THREE.Color().setHSL(0.6, 0.7, 0.5),
-          transparent: true, 
-          opacity: 0.4 
-        });
-        lines.push(new THREE.Line(geometry, material));
-      }
-    });
-    
-    return lines;
-  }, [worldPoints]);
 
   useFrame((state) => {
     if (globeRef.current) {
@@ -137,71 +100,32 @@ const WorldGlobe = () => {
       {/* World outline points */}
       <Points ref={pointsRef} positions={worldPoints}>
         <PointMaterial 
-          size={0.01} 
+          size={0.015} 
           color="#3b82f6" 
           transparent 
           opacity={0.8}
           sizeAttenuation={true}
         />
       </Points>
-      
-      {/* Connection lines */}
-      {connections.map((line, index) => (
-        <primitive key={`connection-${index}`} object={line} />
-      ))}
     </group>
   );
 };
 
-const AdvancedMobius = () => {
+const SimpleMobius = () => {
   const mobiusRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
-    const geometry = new THREE.BufferGeometry();
-    const uSegments = 200;
-    const vSegments = 40;
-    const vertices = [];
-    const indices = [];
-    const colors = [];
-    
-    for (let i = 0; i <= uSegments; i++) {
-      for (let j = 0; j <= vSegments; j++) {
-        const u = (i / uSegments) * Math.PI * 2;
-        const v = ((j / vSegments) - 0.5) * 0.3;
-        
-        // Enhanced Mobius strip with varying width
-        const radius = 2.5 + 0.5 * Math.sin(u * 3);
-        const width = 0.3 + 0.1 * Math.cos(u * 2);
-        
-        const x = (radius + v * width * Math.cos(u / 2)) * Math.cos(u);
-        const y = (radius + v * width * Math.cos(u / 2)) * Math.sin(u);
-        const z = v * width * Math.sin(u / 2) + 0.2 * Math.sin(u * 4);
-        
-        vertices.push(x, y, z);
-        
-        // Color gradient based on position
-        const hue = (u / (Math.PI * 2) + j / vSegments) * 0.5 + 0.55;
-        const color = new THREE.Color().setHSL(hue, 0.7, 0.5);
-        colors.push(color.r, color.g, color.b);
-      }
-    }
-    
-    for (let i = 0; i < uSegments; i++) {
-      for (let j = 0; j < vSegments; j++) {
-        const a = i * (vSegments + 1) + j;
-        const b = a + vSegments + 1;
-        const c = a + 1;
-        const d = b + 1;
-        
-        indices.push(a, b, c);
-        indices.push(b, d, c);
-      }
-    }
-    
-    geometry.setIndex(indices);
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-    geometry.computeVertexNormals();
+    const geometry = new THREE.ParametricGeometry((u, v, target) => {
+      u = u * Math.PI * 2;
+      v = (v - 0.5) * 0.3;
+      
+      const radius = 2.5;
+      const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
+      const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
+      const z = v * Math.sin(u / 2);
+      
+      target.set(x, y, z);
+    }, 100, 20);
     
     return geometry;
   }, []);
@@ -217,7 +141,7 @@ const AdvancedMobius = () => {
   return (
     <mesh ref={mobiusRef} geometry={geometry} scale={0.8} position={[0, 0, 0]}>
       <meshLambertMaterial 
-        vertexColors
+        color="#60a5fa"
         transparent 
         opacity={0.7}
         side={THREE.DoubleSide}
@@ -232,11 +156,11 @@ const FloatingParticles = () => {
   
   const particlePositions = useMemo(() => {
     const positions = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 500; i++) {
       positions.push(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15
       );
     }
     return new Float32Array(positions);
@@ -252,7 +176,7 @@ const FloatingParticles = () => {
   return (
     <Points ref={particlesRef} positions={particlePositions}>
       <PointMaterial 
-        size={0.005} 
+        size={0.008} 
         color="#60a5fa" 
         transparent 
         opacity={0.6}
@@ -286,7 +210,7 @@ const ThreeBackground = () => {
         
         <FloatingParticles />
         <WorldGlobe />
-        <AdvancedMobius />
+        <SimpleMobius />
         
         <ambientLight intensity={0.3} color="#f1f5f9" />
         <directionalLight position={[10, 10, 5]} intensity={0.4} color="#3b82f6" />
