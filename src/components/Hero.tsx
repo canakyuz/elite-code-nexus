@@ -4,48 +4,51 @@ import heroData from "@/content/hero/data.json";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
+    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
       <ThreeBackground />
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/20 z-5"></div>
       
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-12">
-              <div className="space-y-6">
-                <div className="text-small text-blue-500">
+              <div className="space-y-8">
+                <div className="text-small text-blue-300 tracking-wider">
                   {heroData.subtitle}
                 </div>
                 
-                <div className="space-y-2">
-                  <h1 className="text-display text-slate-900 leading-none">
+                <div className="space-y-4">
+                  <h1 className="text-display text-white leading-none">
                     {heroData.title.firstName}
                   </h1>
-                  <h1 className="text-display text-blue-500 leading-none">
+                  <h1 className="text-display text-blue-400 leading-none">
                     {heroData.title.lastName}
                   </h1>
                 </div>
                 
-                <div className="w-16 h-0.5 bg-blue-500"></div>
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
                 
-                <p className="text-body text-slate-600 max-w-lg">
+                <p className="text-body text-slate-300 max-w-lg leading-relaxed">
                   {heroData.description}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-8">
-                <div className="flex items-center gap-3">
-                  <div className={`w-2 h-2 ${heroData.status.available ? 'bg-green-500' : 'bg-red-500'} rounded-full`}></div>
-                  <span className="text-small text-slate-500">
+              <div className="flex items-center justify-between pt-8 border-t border-slate-700/50">
+                <div className="flex items-center gap-4">
+                  <div className={`w-3 h-3 ${heroData.status.available ? 'bg-green-400' : 'bg-red-400'} rounded-full animate-pulse`}></div>
+                  <span className="text-small text-slate-400">
                     {heroData.status.text}
                   </span>
                 </div>
                 
                 <div className="text-right space-y-1">
-                  <div className="text-small text-slate-500">
+                  <div className="text-small text-slate-400">
                     {heroData.location.city}
                   </div>
-                  <div className="text-xs text-slate-400">{heroData.location.timezone}</div>
+                  <div className="text-xs text-slate-500">{heroData.location.timezone}</div>
                 </div>
               </div>
             </div>

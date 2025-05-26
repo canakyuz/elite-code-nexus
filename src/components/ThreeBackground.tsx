@@ -1,76 +1,125 @@
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const ParticleField = () => {
-  const particlesRef = useRef<THREE.Points>(null);
-  const particleCount = 500;
+const NeuralWorldMap = () => {
+  const groupRef = useRef<THREE.Group>(null);
   
-  const [positions, colors] = useMemo(() => {
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    
-    for (let i = 0; i < particleCount; i++) {
-      const phi = Math.acos(-1 + (2 * i) / particleCount);
-      const theta = Math.sqrt(particleCount * Math.PI) * phi;
-      const radius = 8 + Math.random() * 5;
+  const { nodes, connections } = useMemo(() => {
+    // Major world cities coordinates (simplified)
+    const worldCities = [
+      { name: 'New York', lat: 40.7128, lng: -74.0060 },
+      { name: 'London', lat: 51.5074, lng: -0.1278 },
+      { name: 'Tokyo', lat: 35.6762, lng: 139.6503 },
+      { name: 'Sydney', lat: -33.8688, lng: 151.2093 },
+      { name: 'Dubai', lat: 25.2048, lng: 55.2708 },
+      { name: 'Singapore', lat: 1.3521, lng: 103.8198 },
+      { name: 'Mumbai', lat: 19.0760, lng: 72.8777 },
+      { name: 'São Paulo', lat: -23.5505, lng: -46.6333 },
+      { name: 'Cape Town', lat: -33.9249, lng: 18.4241 },
+      { name: 'Moscow', lat: 55.7558, lng: 37.6176 },
+      { name: 'Beijing', lat: 39.9042, lng: 116.4074 },
+      { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+      { name: 'Paris', lat: 48.8566, lng: 2.3522 },
+      { name: 'Berlin', lat: 52.5200, lng: 13.4050 },
+      { name: 'Istanbul', lat: 41.0082, lng: 28.9784 }
+    ];
+
+    // Convert lat/lng to 3D sphere coordinates
+    const nodes = worldCities.map(city => {
+      const phi = (90 - city.lat) * (Math.PI / 180);
+      const theta = (city.lng + 180) * (Math.PI / 180);
+      const radius = 1.5;
       
-      positions[i * 3] = radius * Math.cos(theta) * Math.sin(phi);
-      positions[i * 3 + 1] = radius * Math.sin(theta) * Math.sin(phi);
-      positions[i * 3 + 2] = radius * Math.cos(phi);
-      
-      // Subtle blue particles
-      const blueIntensity = 0.5 + Math.random() * 0.5;
-      colors[i * 3] = 0.2; // R
-      colors[i * 3 + 1] = 0.4; // G
-      colors[i * 3 + 2] = blueIntensity; // B
+      return {
+        name: city.name,
+        position: [
+          radius * Math.sin(phi) * Math.cos(theta),
+          radius * Math.cos(phi),
+          radius * Math.sin(phi) * Math.sin(theta)
+        ] as [number, number, number]
+      };
+    });
+
+    // Create connections between nearby nodes
+    const connections = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const distance = Math.sqrt(
+          Math.pow(nodes[i].position[0] - nodes[j].position[0], 2) +
+          Math.pow(nodes[i].position[1] - nodes[j].position[1], 2) +
+          Math.pow(nodes[i].position[2] - nodes[j].position[2], 2)
+        );
+        
+        // Connect nodes that are reasonably close
+        if (distance < 2.5 && Math.random() > 0.3) {
+          connections.push({ from: i, to: j });
+        }
+      }
     }
-    
-    return [positions, colors];
+
+    return { nodes, connections };
   }, []);
-  
+
   useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.05;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
     }
   });
-  
+
   return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={particleCount}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial 
-        size={0.008} 
-        vertexColors 
-        transparent 
-        opacity={0.4}
-        sizeAttenuation={true}
-      />
-    </points>
+    <group ref={groupRef}>
+      {/* Nodes */}
+      {nodes.map((node, index) => (
+        <mesh key={index} position={node.position}>
+          <sphereGeometry args={[0.02, 8, 8]} />
+          <meshBasicMaterial color="#60a5fa" />
+        </mesh>
+      ))}
+      
+      {/* Connections */}
+      {connections.map((connection, index) => {
+        const start = nodes[connection.from].position;
+        const end = nodes[connection.to].position;
+        const midPoint = [
+          (start[0] + end[0]) / 2,
+          (start[1] + end[1]) / 2,
+          (start[2] + end[2]) / 2
+        ] as [number, number, number];
+        
+        const distance = Math.sqrt(
+          Math.pow(end[0] - start[0], 2) +
+          Math.pow(end[1] - start[1], 2) +
+          Math.pow(end[2] - start[2], 2)
+        );
+
+        return (
+          <line key={index}>
+            <bufferGeometry>
+              <bufferAttribute
+                attach="attributes-position"
+                count={2}
+                array={new Float32Array([...start, ...end])}
+                itemSize={3}
+              />
+            </bufferGeometry>
+            <lineBasicMaterial color="#3b82f6" transparent opacity={0.4} />
+          </line>
+        );
+      })}
+    </group>
   );
 };
 
-const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
+const MobiusStrip = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
-    const uSegments = 100;
+    const uSegments = 120;
     const vSegments = 20;
     const vertices = [];
     const indices = [];
@@ -78,10 +127,10 @@ const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
     for (let i = 0; i <= uSegments; i++) {
       for (let j = 0; j <= vSegments; j++) {
         const u = (i / uSegments) * Math.PI * 2;
-        const v = ((j / vSegments) - 0.5) * 0.3;
+        const v = ((j / vSegments) - 0.5) * 0.4;
         
-        const x = (1 + v * Math.cos(u / 2)) * Math.cos(u);
-        const y = (1 + v * Math.cos(u / 2)) * Math.sin(u);
+        const x = (2 + v * Math.cos(u / 2)) * Math.cos(u);
+        const y = (2 + v * Math.cos(u / 2)) * Math.sin(u);
         const z = v * Math.sin(u / 2);
         
         vertices.push(x, y, z);
@@ -109,14 +158,13 @@ const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
   
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.05;
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.05;
+      meshRef.current.rotation.z = state.clock.elapsedTime * 0.03;
     }
   });
 
   return (
-    <mesh ref={meshRef} position={position} scale={1.5}>
-      <torusGeometry args={[1, 0.3, 16, 100]} />
+    <mesh ref={meshRef} geometry={geometry} scale={1.2}>
       <meshBasicMaterial 
         wireframe 
         color="#3b82f6" 
@@ -127,66 +175,11 @@ const MobiusStrip = ({ position }: { position: [number, number, number] }) => {
   );
 };
 
-const TorusKnot = ({ position }: { position: [number, number, number] }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.15;
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={position} scale={0.8}>
-      <torusKnotGeometry args={[1, 0.3, 100, 16, 3, 2]} />
-      <meshBasicMaterial 
-        wireframe 
-        color="#60a5fa" 
-        transparent 
-        opacity={0.4}
-      />
-    </mesh>
-  );
-};
-
-const WaveGrid = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  const geometry = useMemo(() => {
-    const gridSize = 20;
-    const spacing = 0.5;
-    return new THREE.PlaneGeometry(gridSize * spacing, gridSize * spacing, gridSize - 1, gridSize - 1);
-  }, []);
-  
-  useFrame((state) => {
-    if (meshRef.current && meshRef.current.geometry) {
-      const positions = meshRef.current.geometry.attributes.position;
-      const array = positions.array as Float32Array;
-      
-      for (let i = 0; i < positions.count; i++) {
-        const x = array[i * 3];
-        const z = array[i * 3 + 2];
-        const wave = Math.sin(x * 2 + state.clock.elapsedTime * 0.5) * 
-                    Math.cos(z * 2 + state.clock.elapsedTime * 0.5) * 0.3;
-        array[i * 3 + 1] = wave;
-      }
-      positions.needsUpdate = true;
-    }
-  });
-  
-  return (
-    <mesh ref={meshRef} geometry={geometry} rotation={[-Math.PI / 2, 0, 0]} position={[0, -8, -5]}>
-      <meshBasicMaterial wireframe color="#cbd5e1" transparent opacity={0.2} />
-    </mesh>
-  );
-};
-
 const ThreeBackground = () => {
   return (
-    <div className="absolute inset-0 z-0 opacity-60">
+    <div className="absolute inset-0 z-0 opacity-80">
       <Canvas
-        camera={{ position: [0, 0, 15], fov: 50 }}
+        camera={{ position: [0, 0, 8], fov: 50 }}
         style={{ background: 'transparent' }}
         gl={{ 
           antialias: true,
@@ -199,19 +192,16 @@ const ThreeBackground = () => {
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.2}
-          maxPolarAngle={Math.PI / 1.5}
-          minPolarAngle={Math.PI / 2.5}
+          autoRotateSpeed={0.5}
+          maxPolarAngle={Math.PI / 1.3}
+          minPolarAngle={Math.PI / 2.7}
         />
         
-        <ParticleField />
-        <WaveGrid />
+        <NeuralWorldMap />
+        <MobiusStrip />
         
-        <MobiusStrip position={[4, 2, 0]} />
-        <TorusKnot position={[4, -2, -2]} />
-        
-        <ambientLight intensity={0.3} color="#f8fafc" />
-        <directionalLight position={[10, 10, 5]} intensity={0.2} color="#3b82f6" />
+        <ambientLight intensity={0.4} color="#f8fafc" />
+        <directionalLight position={[10, 10, 5]} intensity={0.3} color="#3b82f6" />
       </Canvas>
     </div>
   );
