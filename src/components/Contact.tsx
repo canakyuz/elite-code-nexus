@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import contactData from "@/content/contact/data.json";
 
 const Contact = () => {
@@ -22,77 +23,87 @@ const Contact = () => {
     });
   };
 
-  return (
-    <section id="contact" className="py-32 px-6 bg-slate-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-20">
-          <div className="lg:col-span-3 space-y-8">
-            <div className="space-y-4">
-              <div className="text-6xl font-extralight text-slate-200">{contactData.sectionNumber}</div>
-              <h2 className="text-title text-slate-900">{contactData.title}</h2>
-            </div>
-          </div>
+  const contactIcons = {
+    "E-posta": Mail,
+    "Telefon": Phone,
+    "Konum": MapPin
+  };
 
-          <div className="lg:col-span-9">
-            <div className="grid lg:grid-cols-2 gap-20">
-              <div className="space-y-12">
-                <div className="space-y-8">
-                  <p className="text-body text-slate-600 leading-relaxed">
-                    {contactData.description}
-                  </p>
-                  
-                  <div className="space-y-6">
-                    {contactData.contactInfo.map((contact, index) => (
-                      <div key={index} className="space-y-2">
-                        <div className="text-small text-slate-400">
-                          {contact.label}
-                        </div>
-                        <a href={contact.href} className="text-slate-900 hover:text-blue-500 transition-colors text-lg">
-                          {contact.value}
-                        </a>
-                      </div>
-                    ))}
+  return (
+    <section id="contact" className="py-20 px-6 bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="text-6xl font-extralight text-blue-100 mb-4">{contactData.sectionNumber}</div>
+          <h2 className="text-4xl font-light text-slate-900 mb-4">{contactData.title}</h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">{contactData.description}</p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Info Cards */}
+          <div className="space-y-6">
+            {contactData.contactInfo.map((contact, index) => {
+              const IconComponent = contactIcons[contact.label as keyof typeof contactIcons] || Mail;
+              return (
+                <div key={index} className="group bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-100 hover:border-blue-200">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                      <IconComponent className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-slate-500 mb-1">{contact.label}</div>
+                      <a 
+                        href={contact.href} 
+                        className="text-slate-900 hover:text-blue-600 transition-colors font-medium"
+                      >
+                        {contact.value}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              );
+            })}
+          </div>
 
-              <div>
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  {contactData.form.fields.map((field, index) => (
-                    <div key={index} className="space-y-2">
-                      {field.type === "textarea" ? (
-                        <textarea
-                          name={field.name}
-                          required={field.required}
-                          rows={field.rows}
-                          value={formData[field.name]}
-                          onChange={handleChange}
-                          placeholder={field.placeholder}
-                          className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-0 bg-white text-slate-900 placeholder-slate-400 rounded-lg resize-none transition-colors"
-                        />
-                      ) : (
-                        <input
-                          type={field.type}
-                          name={field.name}
-                          required={field.required}
-                          value={formData[field.name]}
-                          onChange={handleChange}
-                          placeholder={field.placeholder}
-                          className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-0 bg-white text-slate-900 placeholder-slate-400 rounded-lg transition-colors"
-                        />
-                      )}
-                    </div>
-                  ))}
+          {/* Contact Form */}
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {contactData.form.fields.map((field, index) => (
+                <div key={index} className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700 block">
+                    {field.placeholder}
+                  </label>
+                  {field.type === "textarea" ? (
+                    <textarea
+                      name={field.name}
+                      required={field.required}
+                      rows={field.rows}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      placeholder={field.placeholder}
+                      className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 bg-white text-slate-900 placeholder-slate-400 rounded-lg resize-none transition-all outline-none"
+                    />
+                  ) : (
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      required={field.required}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      placeholder={field.placeholder}
+                      className="w-full p-4 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 bg-white text-slate-900 placeholder-slate-400 rounded-lg transition-all outline-none"
+                    />
+                  )}
+                </div>
+              ))}
 
-                  <button
-                    type="submit"
-                    className="px-8 py-4 bg-blue-500 text-white text-small hover:bg-blue-600 transition-colors rounded-lg"
-                  >
-                    {contactData.form.submitText}
-                  </button>
-                </form>
-              </div>
-            </div>
+              <button
+                type="submit"
+                className="w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2 font-medium"
+              >
+                <Send className="w-5 h-5" />
+                {contactData.form.submitText}
+              </button>
+            </form>
           </div>
         </div>
       </div>
