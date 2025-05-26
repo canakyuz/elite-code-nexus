@@ -1,5 +1,7 @@
 
+import { Link } from "react-router-dom";
 import projectsData from "@/content/projects/data.json";
+import { ArrowRight } from "lucide-react";
 
 const Projects = () => {
   return (
@@ -37,7 +39,7 @@ const Projects = () => {
                       </div>
                     </div>
                     
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-3 mb-6">
                       {project.technologies.map((tech, techIndex) => (
                         <span 
                           key={techIndex}
@@ -46,6 +48,16 @@ const Projects = () => {
                           {tech}
                         </span>
                       ))}
+                    </div>
+
+                    <div className="flex justify-end">
+                      <Link 
+                        to={`/project/${project.id}`}
+                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors font-medium group/link"
+                      >
+                        Detayları İncele
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
                 </div>

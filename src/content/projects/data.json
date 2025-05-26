@@ -4,28 +4,148 @@
   "title": "Projects",
   "projects": [
     {
+      "id": "nexfit",
       "title": "NexFit",
       "year": "2024",
       "description": "Fitness platform developed with microservice architecture. User management, exercise programming, and payment system integrations.",
-      "technologies": ["Node.js", "React", "PostgreSQL", "Microservices", "Stripe API"]
+      "technologies": ["Node.js", "React", "PostgreSQL", "Microservices", "Stripe API"],
+      "blogContent": {
+        "title": "Building NexFit: A Modern Fitness Platform",
+        "publishDate": "2024-03-15",
+        "readTime": "8 min read",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "NexFit projesi, modern fitness endüstrisinin ihtiyaçlarını karşılamak için geliştirilmiş kapsamlı bir platformdur. Microservice mimarisi kullanarak ölçeklenebilir ve modüler bir çözüm oluşturduk."
+          },
+          {
+            "type": "heading",
+            "text": "Teknoloji Seçimleri"
+          },
+          {
+            "type": "paragraph",
+            "text": "Backend için Node.js ve Express.js kullanırken, veritabanı olarak PostgreSQL tercih ettik. Frontend'de React ile modern bir kullanıcı arayüzü geliştirdik."
+          },
+          {
+            "type": "heading",
+            "text": "Microservice Mimarisi"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sistemimizi kullanıcı yönetimi, egzersiz programlama, ödeme sistemi ve raporlama olmak üzere dört ana mikroservise böldük. Bu yaklaşım bize büyük esneklik sağladı."
+          },
+          {
+            "type": "heading",
+            "text": "Karşılaştığımız Zorluklar"
+          },
+          {
+            "type": "paragraph",
+            "text": "En büyük zorluklardan biri mikroservisler arası iletişimin optimize edilmesiydi. Redis cache sistemi ve API Gateway kullanarak bu sorunu çözdük."
+          }
+        ]
+      }
     },
     {
+      "id": "atlas-ai",
       "title": "Atlas AI",
       "year": "2024", 
       "description": "Fully local, security-focused AI assistant. Privacy-preserving, customizable AI solution that protects user data.",
-      "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"]
+      "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"],
+      "blogContent": {
+        "title": "Atlas AI: Privacy-First Yapay Zeka Asistanı",
+        "publishDate": "2024-02-20",
+        "readTime": "6 min read",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Atlas AI, kullanıcı gizliliğini en üst seviyede tutan, tamamen yerel çalışan bir yapay zeka asistanıdır. Verilerin bulut sunucularına gönderilmediği bu çözüm, kurumsal güvenlik gereksinimleri için ideal."
+          },
+          {
+            "type": "heading",
+            "text": "Gizlilik Odaklı Tasarım"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tüm AI hesaplamaları kullanıcının kendi cihazında gerçekleşir. Hiçbir veri dış sunuculara gönderilmez, bu da tam gizlilik garantisi sağlar."
+          },
+          {
+            "type": "heading",
+            "text": "Teknik Altyapı"
+          },
+          {
+            "type": "paragraph",
+            "text": "Python ve TensorFlow kullanarak optimize edilmiş yerel LLM modelleri geliştirdik. Electron ile cross-platform masaüstü uygulaması oluşturduk."
+          }
+        ]
+      }
     },
     {
+      "id": "nexpanel",
       "title": "NexPanel",
       "year": "2023",
       "description": "Customizable modular management system with multi-tenant panel architecture. Scalable infrastructure for SaaS products.",
-      "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modular Architecture"]
+      "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modular Architecture"],
+      "blogContent": {
+        "title": "NexPanel: Modüler SaaS Yönetim Sistemi",
+        "publishDate": "2023-11-10",
+        "readTime": "10 min read",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "NexPanel, SaaS ürünleri için geliştirilmiş modüler ve çok kiracılı yönetim paneli sistemidir. Farklı müşteri ihtiyaçlarına göre özelleştirilebilir yapısı ile öne çıkar."
+          },
+          {
+            "type": "heading",
+            "text": "Multi-Tenant Mimari"
+          },
+          {
+            "type": "paragraph",
+            "text": "Her müşterinin kendi izole ortamına sahip olduğu, ancak aynı kod tabanını paylaştığı akıllı bir mimari tasarladık."
+          },
+          {
+            "type": "heading",
+            "text": "Modüler Yapı"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sistem, müşteri ihtiyaçlarına göre aktif/pasif edilebilen modüllerden oluşur. Bu sayede her müşteri sadece ihtiyacı olan özellikleri kullanır."
+          }
+        ]
+      }
     },
     {
+      "id": "nexcv-nexbook",
       "title": "NexCV & NexBook",
       "year": "2023",
       "description": "AI-powered CV builder and appointment management system. Customer-focused solutions with SaaS model.",
-      "technologies": ["React", "AI/ML", "SaaS", "Customer Management"]
+      "technologies": ["React", "AI/ML", "SaaS", "Customer Management"],
+      "blogContent": {
+        "title": "NexCV & NexBook: AI Destekli İş Çözümleri",
+        "publishDate": "2023-09-05",
+        "readTime": "7 min read",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "NexCV ve NexBook, yapay zeka destekli CV oluşturma ve randevu yönetim sistemleri olarak geliştirildi. İki farklı ihtiyaca yönelik entegre çözümler sunar."
+          },
+          {
+            "type": "heading",
+            "text": "AI-Powered CV Builder"
+          },
+          {
+            "type": "paragraph",
+            "text": "NexCV, kullanıcıların profesyonel CV'lerini AI yardımıyla oluşturmasına olanak tanır. Sektör standartlarına uygun tasarımlar ve içerik önerileri sunar."
+          },
+          {
+            "type": "heading",
+            "text": "Akıllı Randevu Sistemi"
+          },
+          {
+            "type": "paragraph",
+            "text": "NexBook, işletmelerin randevu süreçlerini otomatize eder. Müşteri tercihlerini öğrenen AI, en uygun randevu saatlerini önerir."
+          }
+        ]
+      }
     }
   ]
 }
