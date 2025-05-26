@@ -8,7 +8,7 @@ const Projects = () => {
     <section id="work" className="py-20 px-6 bg-gradient-to-br from-white to-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-4 space-y-8">
+          <div className="lg:col-span-3 space-y-8">
             <div className="space-y-6">
               <div className="text-6xl font-extralight text-blue-100 leading-none">{projectsData.sectionNumber}</div>
               <h2 className="text-4xl font-light text-slate-900 relative">
@@ -18,7 +18,7 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-8 space-y-8">
+          <div className="lg:col-span-9 space-y-8">
             {projectsData.projects.map((project, index) => (
               <div key={index} className="group">
                 <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 hover:border-blue-200 hover:-translate-y-1">

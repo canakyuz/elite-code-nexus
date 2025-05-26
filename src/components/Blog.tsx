@@ -7,7 +7,7 @@ const Blog = () => {
     <section id="blog" className="py-20 px-6 bg-gradient-to-br from-white to-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-4 space-y-8">
+          <div className="lg:col-span-3 space-y-8">
             <div className="space-y-6">
               <div className="text-6xl font-extralight text-blue-100 leading-none">{blogData.sectionNumber}</div>
               <h2 className="text-4xl font-light text-slate-900 relative">
@@ -17,7 +17,7 @@ const Blog = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-9">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogData.posts.map((post, index) => (
                 <article 
