@@ -24,7 +24,7 @@ const Contact = () => {
               <div className="text-4xl font-extralight text-blue-100 leading-none">{contactData.sectionNumber}</div>
               <h2 className="text-title text-slate-900 relative font-departure">
                 {contactData.title}
-                <div className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                <div className="absolute -bottom-1 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
               </h2>
             </div>
           </div>
