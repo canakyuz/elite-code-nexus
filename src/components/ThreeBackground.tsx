@@ -7,9 +7,10 @@ import * as THREE from 'three';
 
 const NeuralWorldMap = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const linesRef = useRef<THREE.Group>(null);
   
   const { nodes, connections } = useMemo(() => {
-    // Major world cities coordinates (simplified)
+    // Major world cities coordinates
     const worldCities = [
       { name: 'New York', lat: 40.7128, lng: -74.0060 },
       { name: 'London', lat: 51.5074, lng: -0.1278 },
@@ -64,6 +65,18 @@ const NeuralWorldMap = () => {
     return { nodes, connections };
   }, []);
 
+  // Create line geometries
+  const lineGeometries = useMemo(() => {
+    return connections.map(connection => {
+      const points = [
+        new THREE.Vector3(...nodes[connection.from].position),
+        new THREE.Vector3(...nodes[connection.to].position)
+      ];
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      return geometry;
+    });
+  }, [connections, nodes]);
+
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
@@ -72,36 +85,22 @@ const NeuralWorldMap = () => {
 
   return (
     <group ref={groupRef}>
-      {/* Nodes */}
+      {/* Node spheres */}
       {nodes.map((node, index) => (
-        <mesh key={index} position={node.position}>
-          <sphereGeometry args={[0.02, 8, 8]} />
+        <mesh key={`node-${index}`} position={node.position}>
+          <sphereGeometry args={[0.025, 12, 12]} />
           <meshBasicMaterial color="#60a5fa" />
         </mesh>
       ))}
       
-      {/* Connections using proper mesh lines */}
-      {connections.map((connection, index) => {
-        const start = new THREE.Vector3(...nodes[connection.from].position);
-        const end = new THREE.Vector3(...nodes[connection.to].position);
-        
-        const points = [start, end];
-        const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        
-        return (
-          <primitive 
-            key={index} 
-            object={new THREE.Line(
-              geometry, 
-              new THREE.LineBasicMaterial({ 
-                color: "#3b82f6", 
-                transparent: true, 
-                opacity: 0.4 
-              })
-            )} 
-          />
-        );
-      })}
+      {/* Connection lines */}
+      <group ref={linesRef}>
+        {lineGeometries.map((geometry, index) => (
+          <line key={`line-${index}`} geometry={geometry}>
+            <lineBasicMaterial color="#3b82f6" transparent opacity={0.6} />
+          </line>
+        ))}
+      </group>
     </group>
   );
 };
