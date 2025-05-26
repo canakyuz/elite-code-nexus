@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, List, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -8,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 interface BlogPost {
   id: string;
   title: string;
@@ -18,19 +16,20 @@ interface BlogPost {
   category: string;
   slug: string;
 }
-
 interface TableOfContentsItem {
   id: string;
   text: string;
   level: number;
 }
-
 const BlogDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const {
+    slug
+  } = useParams<{
+    slug: string;
+  }>();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string>("");
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>([]);
-
   const post = blogData.posts.find(p => p.slug === slug);
 
   // Group posts by category
@@ -68,7 +67,6 @@ const BlogDetail = () => {
     <h2 id="conclusion">Conclusion</h2>
     <p>Final thoughts and summary of the key points discussed in this article.</p>
   `;
-
   useEffect(() => {
     // Extract table of contents from content
     const parser = new DOMParser();
@@ -81,12 +79,10 @@ const BlogDetail = () => {
     }));
     setTableOfContents(toc);
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
       const scrollPosition = window.scrollY + 100;
-      
       for (let i = headings.length - 1; i >= 0; i--) {
         const heading = headings[i] as HTMLElement;
         if (heading.offsetTop <= scrollPosition) {
@@ -95,21 +91,19 @@ const BlogDetail = () => {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
   if (!post) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+    return <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
         <Navbar />
         <div className="pt-32 pb-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
@@ -121,12 +115,9 @@ const BlogDetail = () => {
           </div>
         </div>
         <Footer />
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
       <Navbar />
       
       <div className="pt-20">
@@ -134,12 +125,7 @@ const BlogDetail = () => {
           {/* Left Sidebar - Posts List */}
           <div className="w-80 bg-gradient-to-b from-blue-50 to-indigo-50 border-r border-blue-100 h-screen sticky top-0 overflow-hidden">
             <div className="p-6 border-b border-blue-200 bg-white/50 backdrop-blur-sm">
-              <Button 
-                onClick={() => navigate('/')} 
-                variant="ghost" 
-                size="sm" 
-                className="mb-4 -ml-2 font-departure text-blue-700 hover:text-blue-900 hover:bg-blue-100"
-              >
+              <Button onClick={() => navigate('/')} variant="ghost" size="sm" className="mb-4 -ml-2 font-departure text-blue-700 hover:text-blue-900 hover:bg-blue-100">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -150,58 +136,34 @@ const BlogDetail = () => {
               <div className="p-6">
                 <Tabs defaultValue={Object.keys(groupedPosts)[0]} className="w-full">
                   <TabsList className="grid w-full grid-cols-3 mb-6 bg-white/80 backdrop-blur-sm">
-                    {Object.keys(groupedPosts).map(category => (
-                      <TabsTrigger 
-                        key={category} 
-                        value={category} 
-                        className="text-xs font-departure data-[state=active]:bg-blue-500 data-[state=active]:text-white"
-                      >
+                    {Object.keys(groupedPosts).map(category => <TabsTrigger key={category} value={category} className="text-xs font-departure data-[state=active]:bg-blue-500 data-[state=active]:text-white">
                         {category}
-                      </TabsTrigger>
-                    ))}
+                      </TabsTrigger>)}
                   </TabsList>
                   
-                  {Object.entries(groupedPosts).map(([category, posts]) => (
-                    <TabsContent key={category} value={category} className="space-y-3">
-                      {posts.map(blogPost => (
-                        <div
-                          key={blogPost.id}
-                          onClick={() => navigate(`/blog/${blogPost.slug}`)}
-                          className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
-                            blogPost.slug === slug 
-                              ? 'bg-gradient-to-r from-blue-500 to-indigo-500 border-blue-300 text-white shadow-lg' 
-                              : 'bg-white/80 backdrop-blur-sm border-blue-200 hover:border-blue-300 hover:bg-white'
-                          }`}
-                        >
-                          <h3 className={`font-medium text-sm mb-2 font-departure line-clamp-2 ${
-                            blogPost.slug === slug ? 'text-white' : 'text-slate-900'
-                          }`}>
+                  {Object.entries(groupedPosts).map(([category, posts]) => <TabsContent key={category} value={category} className="space-y-3">
+                      {posts.map(blogPost => <div key={blogPost.id} onClick={() => navigate(`/blog/${blogPost.slug}`)} className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${blogPost.slug === slug ? 'bg-gradient-to-r from-blue-500 to-indigo-500 border-blue-300 text-white shadow-lg' : 'bg-white/80 backdrop-blur-sm border-blue-200 hover:border-blue-300 hover:bg-white'}`}>
+                          <h3 className={`font-medium text-sm mb-2 font-departure line-clamp-2 ${blogPost.slug === slug ? 'text-white' : 'text-slate-900'}`}>
                             {blogPost.title}
                           </h3>
-                          <p className={`text-xs mb-3 line-clamp-2 font-departure ${
-                            blogPost.slug === slug ? 'text-blue-100' : 'text-slate-600'
-                          }`}>
+                          <p className={`text-xs mb-3 line-clamp-2 font-departure ${blogPost.slug === slug ? 'text-blue-100' : 'text-slate-600'}`}>
                             {blogPost.excerpt}
                           </p>
-                          <div className={`flex items-center gap-3 text-xs ${
-                            blogPost.slug === slug ? 'text-blue-200' : 'text-slate-500'
-                          }`}>
+                          <div className={`flex items-center gap-3 text-xs ${blogPost.slug === slug ? 'text-blue-200' : 'text-slate-500'}`}>
                             <div className="flex items-center gap-1 font-departure">
                               <Calendar className="w-3 h-3" />
                               {new Date(blogPost.publishDate).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric'
-                              })}
+                          month: 'short',
+                          day: 'numeric'
+                        })}
                             </div>
                             <div className="flex items-center gap-1 font-departure">
                               <Clock className="w-3 h-3" />
                               {blogPost.readTime}
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </TabsContent>
-                  ))}
+                        </div>)}
+                    </TabsContent>)}
                 </Tabs>
               </div>
             </ScrollArea>
@@ -232,10 +194,10 @@ const BlogDetail = () => {
                       <div className="flex items-center gap-2 font-departure">
                         <Calendar className="w-4 h-4 text-blue-500" />
                         {new Date(post.publishDate).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
                       </div>
                       <div className="flex items-center gap-2 font-departure">
                         <Clock className="w-4 h-4 text-blue-500" />
@@ -244,11 +206,10 @@ const BlogDetail = () => {
                     </div>
                   </div>
 
-                  <div className="pt-8">
-                    <div 
-                      className="prose prose-lg max-w-none prose-headings:font-departure prose-p:font-departure prose-headings:text-slate-900 prose-p:text-slate-700 prose-headings:border-l-4 prose-headings:border-blue-500 prose-headings:pl-4 prose-headings:bg-blue-50 prose-headings:py-2 prose-headings:rounded-r-lg" 
-                      dangerouslySetInnerHTML={{ __html: mockContent }} 
-                    />
+                  <div className="pt-8 text-slate-500">
+                    <div className="prose prose-lg max-w-none prose-headings:font-departure prose-p:font-departure prose-headings:text-slate-900 prose-p:text-slate-700 prose-headings:border-l-4 prose-headings:border-blue-500 prose-headings:pl-4 prose-headings:bg-blue-50 prose-headings:py-2 prose-headings:rounded-r-lg" dangerouslySetInnerHTML={{
+                    __html: mockContent
+                  }} />
                   </div>
                 </div>
               </div>
@@ -265,20 +226,11 @@ const BlogDetail = () => {
               
               <ScrollArea className="h-full">
                 <nav className="space-y-1">
-                  {tableOfContents.map(item => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 font-departure ${
-                        activeSection === item.id 
-                          ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md font-medium' 
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-sm'
-                      }`}
-                      style={{ paddingLeft: `${(item.level - 1) * 12 + 12}px` }}
-                    >
+                  {tableOfContents.map(item => <button key={item.id} onClick={() => scrollToSection(item.id)} className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 font-departure ${activeSection === item.id ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md font-medium' : 'text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-sm'}`} style={{
+                  paddingLeft: `${(item.level - 1) * 12 + 12}px`
+                }}>
                       {item.text}
-                    </button>
-                  ))}
+                    </button>)}
                 </nav>
               </ScrollArea>
             </div>
@@ -287,8 +239,6 @@ const BlogDetail = () => {
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BlogDetail;
