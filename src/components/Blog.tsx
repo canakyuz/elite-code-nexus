@@ -4,16 +4,18 @@ import blogData from "@/content/blog/data.json";
 
 const Blog = () => {
   return (
-    <section id="blog" className="py-20 px-6 bg-white">
+    <section id="blog" className="py-20 px-6 bg-gradient-to-br from-white to-slate-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="text-6xl font-extralight text-blue-100 mb-4">{blogData.sectionNumber}</div>
-          <h2 className="text-4xl font-light text-slate-900 mb-4 relative inline-block">
-            {blogData.title}
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
-          </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">{blogData.subtitle}</p>
-        </div>
+        <div className="grid lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-4 space-y-8">
+            <div className="space-y-6">
+              <div className="text-6xl font-extralight text-blue-100 leading-none">{blogData.sectionNumber}</div>
+              <h2 className="text-4xl font-light text-slate-900 relative">
+                {blogData.title}
+                <div className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+              </h2>
+            </div>
+          </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogData.posts.map((post, index) => (
