@@ -4,14 +4,14 @@
     "firstName": "CAN",
     "lastName": "AKYÜZ"
   },
-  "subtitle": "YAZILIM MİMARİ & GİRİŞİMCİ",
-  "description": "Matematik geçmişi ile yazılım dünyasında ölçeklenebilir çözümler geliştiren, yapay zeka entegrasyonları ile global problemlere teknik derinlikle yaklaşan ürün odaklı geliştirici.",
+  "subtitle": "SOFTWARE ARCHITECT & ENTREPRENEUR",
+  "description": "A product-focused developer with a mathematics background, building scalable solutions in the software world and approaching global problems with technical depth through AI integrations.",
   "status": {
-    "text": "Yeni projeler için müsait",
+    "text": "Available for new projects",
     "available": true
   },
   "location": {
-    "city": "İstanbul, Türkiye",
+    "city": "Istanbul, Turkey",
     "timezone": "UTC+3"
   }
 }

@@ -1,30 +1,30 @@
 
 {
   "sectionNumber": "02",
-  "title": "Projeler",
+  "title": "Projects",
   "projects": [
     {
       "title": "NexFit",
       "year": "2024",
-      "description": "Mikroservis mimarisi ile geliştirilmiş fitness platformu. Kullanıcı yönetimi, egzersiz programlama ve ödeme sistemleri entegrasyonu.",
-      "technologies": ["Node.js", "React", "PostgreSQL", "Mikroservisler", "Stripe API"]
+      "description": "Fitness platform developed with microservice architecture. User management, exercise programming, and payment system integrations.",
+      "technologies": ["Node.js", "React", "PostgreSQL", "Microservices", "Stripe API"]
     },
     {
       "title": "Atlas AI",
       "year": "2024", 
-      "description": "Tamamen yerel çalışan, güvenlik odaklı yapay zeka asistanı. Kullanıcı verilerini koruyan, özelleştirilebilir AI çözümü.",
+      "description": "Fully local, security-focused AI assistant. Privacy-preserving, customizable AI solution that protects user data.",
       "technologies": ["Python", "TensorFlow", "Electron", "Local LLM", "Privacy-First"]
     },
     {
       "title": "NexPanel",
       "year": "2023",
-      "description": "Multi-tenant panel mimarisi ile özelleştirilebilir modüler yönetim sistemi. SaaS ürünler için ölçeklenebilir altyapı.",
-      "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modüler Mimari"]
+      "description": "Customizable modular management system with multi-tenant panel architecture. Scalable infrastructure for SaaS products.",
+      "technologies": ["Next.js", "TypeScript", "Multi-tenant", "Modular Architecture"]
     },
     {
       "title": "NexCV & NexBook",
       "year": "2023",
-      "description": "AI destekli CV oluşturucu ve randevu yönetim sistemi. SaaS modeli ile müşteri odaklı çözümler.",
+      "description": "AI-powered CV builder and appointment management system. Customer-focused solutions with SaaS model.",
       "technologies": ["React", "AI/ML", "SaaS", "Customer Management"]
     }
   ]

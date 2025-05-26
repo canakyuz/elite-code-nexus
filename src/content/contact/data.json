@@ -1,8 +1,8 @@
 
 {
   "sectionNumber": "04",
-  "title": "İletişim",
-  "description": "Yeni projeler, işbirlikleri veya teknik konularda görüş alışverişi için benimle iletişime geçebilirsiniz. Her mesaja 24 saat içinde yanıt veriyorum.",
+  "title": "Contact",
+  "description": "Feel free to reach out for new projects, collaborations, or technical discussions. I respond to every message within 24 hours.",
   "contactInfo": [
     {
       "label": "Email",
@@ -25,29 +25,29 @@
       {
         "name": "name",
         "type": "text",
-        "placeholder": "Adınız",
+        "placeholder": "Your Name",
         "required": true
       },
       {
         "name": "email",
         "type": "email",
-        "placeholder": "E-posta adresiniz",
+        "placeholder": "Your Email",
         "required": true
       },
       {
         "name": "project",
         "type": "text",
-        "placeholder": "Proje/Konu (opsiyonel)",
+        "placeholder": "Project/Subject (optional)",
         "required": false
       },
       {
         "name": "message",
         "type": "textarea",
-        "placeholder": "Mesajınız",
+        "placeholder": "Your Message",
         "required": true,
         "rows": 4
       }
     ],
-    "submitText": "Mesaj Gönder"
+    "submitText": "Send Message"
   }
 }

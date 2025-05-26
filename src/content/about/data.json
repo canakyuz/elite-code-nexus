@@ -1,25 +1,25 @@
 
 {
   "sectionNumber": "01",
-  "title": "Hakkımda",
-  "mainDescription": "Matematik doktora geçmişi ile yazılım mimarisi arasında köprü kuran, mikroservis altyapıları ve yapay zeka entegrasyonları konusunda uzmanlaşmış geliştirici ve girişimci.",
+  "title": "About Me",
+  "mainDescription": "A developer and entrepreneur bridging mathematics doctoral background with software architecture, specialized in microservice infrastructures and artificial intelligence integrations.",
   "detailedDescription": [
-    "Akademik kariyerime matematik alanında başladım ve doktora çalışmalarım sırasında algoritma geliştirme ve problem çözme becerilerimi derinleştirdim. Bu güçlü matematik altyapısı, yazılım geliştirme süreçlerimde karmaşık problemleri sistematik yaklaşımlarla çözmeme olanak sağlıyor.",
-    "Son yıllarda mikroservis mimarileri, ölçeklenebilir backend sistemleri ve yapay zeka entegrasyonları üzerine odaklandım. NexFit, NexPanel, Atlas AI gibi projelerimde hem teknik derinlik hem de kullanıcı deneyimi odaklı çözümler geliştiriyorum.",
-    "Hedefim, global ölçekte etkili olabilecek, teknik açıdan sağlam ve kullanıcı ihtiyaçlarını tam olarak karşılayan ürünler yaratmak. Her projemde öğrendiğim deneyimleri bir sonraki adımda daha büyük çözümlere dönüştürmeye odaklanıyorum."
+    "I began my academic career in mathematics and deepened my algorithm development and problem-solving skills during my doctoral studies. This strong mathematical foundation enables me to solve complex problems with systematic approaches in my software development processes.",
+    "In recent years, I've focused on microservice architectures, scalable backend systems, and artificial intelligence integrations. In projects like NexFit, NexPanel, and Atlas AI, I develop solutions that emphasize both technical depth and user experience.",
+    "My goal is to create products that can be effective on a global scale, technically sound, and fully meet user needs. I focus on transforming the experiences I learn from each project into bigger solutions in the next step."
   ],
   "highlights": [
     {
       "number": "5+",
-      "label": "Aktif SaaS Projesi"
+      "label": "Active SaaS Projects"
     },
     {
       "number": "10+",
-      "label": "Yıl Yazılım Deneyimi"
+      "label": "Years of Software Experience"
     },
     {
       "number": "100K+",
-      "label": "Kullanıcıya Ulaşan Çözümler"
+      "label": "Users Reached"
     }
   ]
 }

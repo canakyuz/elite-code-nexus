@@ -1,22 +1,22 @@
 
 {
   "sectionNumber": "03",
-  "title": "Uzmanlık Alanları",
+  "title": "Expertise Areas",
   "categories": [
     {
-      "title": "Backend Mimarisi",
-      "skills": ["Mikroservisler", "Node.js", "Python", "PostgreSQL", "Redis", "API Gateway"]
+      "title": "Backend Architecture",
+      "skills": ["Microservices", "Node.js", "Python", "PostgreSQL", "Redis", "API Gateway"]
     },
     {
-      "title": "Yapay Zeka & ML", 
-      "skills": ["TensorFlow", "Local LLM", "AI Entegrasyonu", "Privacy-First AI", "Algorithm Design"]
+      "title": "AI & Machine Learning", 
+      "skills": ["TensorFlow", "Local LLM", "AI Integration", "Privacy-First AI", "Algorithm Design"]
     },
     {
       "title": "Frontend & UI/UX",
       "skills": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Responsive Design"]
     },
     {
-      "title": "DevOps & Ölçeklendirme",
+      "title": "DevOps & Scaling",
       "skills": ["Docker", "AWS", "CI/CD", "Multi-tenant", "Performance Optimization"]
     }
   ]
