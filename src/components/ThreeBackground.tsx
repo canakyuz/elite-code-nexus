@@ -1,130 +1,188 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Sphere, Points, PointMaterial } from '@react-three/drei';
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const NeuralWorldMap = () => {
-  const groupRef = useRef<THREE.Group>(null);
+const WorldGlobe = () => {
+  const globeRef = useRef<THREE.Group>(null);
+  const pointsRef = useRef<THREE.Points>(null);
   
-  const { nodes, connections } = useMemo(() => {
-    // Major world cities coordinates
-    const worldCities = [
-      { name: 'New York', lat: 40.7128, lng: -74.0060 },
-      { name: 'London', lat: 51.5074, lng: -0.1278 },
-      { name: 'Tokyo', lat: 35.6762, lng: 139.6503 },
-      { name: 'Sydney', lat: -33.8688, lng: 151.2093 },
-      { name: 'Dubai', lat: 25.2048, lng: 55.2708 },
-      { name: 'Singapore', lat: 1.3521, lng: 103.8198 },
-      { name: 'Mumbai', lat: 19.0760, lng: 72.8777 },
-      { name: 'São Paulo', lat: -23.5505, lng: -46.6333 },
-      { name: 'Cape Town', lat: -33.9249, lng: 18.4241 },
-      { name: 'Moscow', lat: 55.7558, lng: 37.6176 },
-      { name: 'Beijing', lat: 39.9042, lng: 116.4074 },
-      { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
-      { name: 'Paris', lat: 48.8566, lng: 2.3522 },
-      { name: 'Berlin', lat: 52.5200, lng: 13.4050 },
-      { name: 'Istanbul', lat: 41.0082, lng: 28.9784 }
-    ];
-
-    // Convert lat/lng to 3D sphere coordinates
-    const nodes = worldCities.map(city => {
-      const phi = (90 - city.lat) * (Math.PI / 180);
-      const theta = (city.lng + 180) * (Math.PI / 180);
-      const radius = 1.5;
+  // Create world outline points based on actual world coordinates
+  const worldPoints = useMemo(() => {
+    const points = [];
+    const radius = 1.2;
+    
+    // Add more detailed world outline
+    const worldCoordinates = [
+      // North America
+      { lat: 71, lng: -156 }, { lat: 60, lng: -165 }, { lat: 51, lng: -178 },
+      { lat: 49, lng: -125 }, { lat: 48, lng: -123 }, { lat: 42, lng: -124 },
+      { lat: 32, lng: -117 }, { lat: 25, lng: -97 }, { lat: 25, lng: -80 },
+      { lat: 45, lng: -75 }, { lat: 60, lng: -95 }, { lat: 69, lng: -105 },
       
-      return {
-        name: city.name,
-        position: [
-          radius * Math.sin(phi) * Math.cos(theta),
-          radius * Math.cos(phi),
-          radius * Math.sin(phi) * Math.sin(theta)
-        ] as [number, number, number]
-      };
-    });
-
-    // Create connections between nearby nodes
-    const connections = [];
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const distance = Math.sqrt(
-          Math.pow(nodes[i].position[0] - nodes[j].position[0], 2) +
-          Math.pow(nodes[i].position[1] - nodes[j].position[1], 2) +
-          Math.pow(nodes[i].position[2] - nodes[j].position[2], 2)
-        );
+      // South America
+      { lat: 12, lng: -69 }, { lat: 5, lng: -60 }, { lat: -5, lng: -35 },
+      { lat: -15, lng: -39 }, { lat: -23, lng: -43 }, { lat: -34, lng: -58 },
+      { lat: -41, lng: -65 }, { lat: -54, lng: -68 }, { lat: -22, lng: -68 },
+      { lat: -18, lng: -70 }, { lat: -12, lng: -77 }, { lat: 1, lng: -79 },
+      
+      // Europe
+      { lat: 71, lng: 25 }, { lat: 60, lng: 5 }, { lat: 54, lng: -2 },
+      { lat: 50, lng: 2 }, { lat: 43, lng: 7 }, { lat: 39, lng: 22 },
+      { lat: 36, lng: 25 }, { lat: 37, lng: 15 }, { lat: 46, lng: 14 },
+      { lat: 52, lng: 21 }, { lat: 60, lng: 30 }, { lat: 67, lng: 33 },
+      
+      // Africa
+      { lat: 37, lng: -10 }, { lat: 31, lng: 32 }, { lat: 11, lng: 43 },
+      { lat: 0, lng: 38 }, { lat: -26, lng: 28 }, { lat: -34, lng: 18 },
+      { lat: -22, lng: 14 }, { lat: -12, lng: 13 }, { lat: 0, lng: 9 },
+      { lat: 15, lng: 0 }, { lat: 20, lng: -17 },
+      
+      // Asia
+      { lat: 77, lng: 100 }, { lat: 70, lng: 60 }, { lat: 55, lng: 38 },
+      { lat: 41, lng: 36 }, { lat: 36, lng: 138 }, { lat: 24, lng: 121 },
+      { lat: 1, lng: 104 }, { lat: 22, lng: 88 }, { lat: 28, lng: 77 },
+      { lat: 34, lng: 69 }, { lat: 43, lng: 87 }, { lat: 55, lng: 83 },
+      { lat: 64, lng: 97 }, { lat: 71, lng: 129 },
+      
+      // Australia & Oceania
+      { lat: -10, lng: 142 }, { lat: -26, lng: 153 }, { lat: -37, lng: 145 },
+      { lat: -35, lng: 138 }, { lat: -32, lng: 116 }, { lat: -20, lng: 119 },
+      { lat: -12, lng: 131 }, { lat: -9, lng: 147 },
+    ];
+    
+    // Convert to 3D coordinates and add some randomness for organic look
+    worldCoordinates.forEach(coord => {
+      const phi = (90 - coord.lat) * (Math.PI / 180);
+      const theta = (coord.lng + 180) * (Math.PI / 180);
+      
+      // Add multiple points around each coordinate for density
+      for (let i = 0; i < 5; i++) {
+        const offsetPhi = phi + (Math.random() - 0.5) * 0.1;
+        const offsetTheta = theta + (Math.random() - 0.5) * 0.1;
+        const offsetRadius = radius + (Math.random() - 0.5) * 0.05;
         
-        // Connect nodes that are reasonably close
-        if (distance < 2.5 && Math.random() > 0.3) {
-          connections.push({ from: i, to: j });
-        }
+        points.push(
+          offsetRadius * Math.sin(offsetPhi) * Math.cos(offsetTheta),
+          offsetRadius * Math.cos(offsetPhi),
+          offsetRadius * Math.sin(offsetPhi) * Math.sin(offsetTheta)
+        );
       }
-    }
-
-    return { nodes, connections };
+    });
+    
+    return new Float32Array(points);
   }, []);
 
-  // Create line objects
-  const lineObjects = useMemo(() => {
-    return connections.map(connection => {
-      const points = [
-        new THREE.Vector3(...nodes[connection.from].position),
-        new THREE.Vector3(...nodes[connection.to].position)
-      ];
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      const material = new THREE.LineBasicMaterial({ 
-        color: "#3b82f6", 
-        transparent: true, 
-        opacity: 0.6 
-      });
-      return new THREE.Line(geometry, material);
+  const connections = useMemo(() => {
+    const lines = [];
+    const connectionPairs = [
+      // Major flight routes and connections
+      [0, 15], [15, 30], [30, 45], [45, 60], [60, 75], [75, 90],
+      [5, 35], [35, 65], [65, 95], [10, 40], [40, 70], [70, 100],
+      [20, 50], [50, 80], [80, 110], [25, 55], [55, 85], [85, 115],
+    ];
+    
+    connectionPairs.forEach(([from, to]) => {
+      if (from * 15 < worldPoints.length && to * 15 < worldPoints.length) {
+        const points = [
+          new THREE.Vector3(
+            worldPoints[from * 15],
+            worldPoints[from * 15 + 1],
+            worldPoints[from * 15 + 2]
+          ),
+          new THREE.Vector3(
+            worldPoints[to * 15],
+            worldPoints[to * 15 + 1],
+            worldPoints[to * 15 + 2]
+          )
+        ];
+        
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        const material = new THREE.LineBasicMaterial({ 
+          color: new THREE.Color().setHSL(0.6, 0.7, 0.5),
+          transparent: true, 
+          opacity: 0.4 
+        });
+        lines.push(new THREE.Line(geometry, material));
+      }
     });
-  }, [connections, nodes]);
+    
+    return lines;
+  }, [worldPoints]);
 
   useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
+    if (globeRef.current) {
+      globeRef.current.rotation.y = state.clock.elapsedTime * 0.05;
+    }
+    
+    if (pointsRef.current) {
+      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.03;
     }
   });
 
   return (
-    <group ref={groupRef}>
-      {/* Node spheres */}
-      {nodes.map((node, index) => (
-        <mesh key={`node-${index}`} position={node.position}>
-          <sphereGeometry args={[0.025, 12, 12]} />
-          <meshBasicMaterial color="#60a5fa" />
-        </mesh>
-      ))}
+    <group ref={globeRef} position={[0, 0, 0]}>
+      {/* Base globe wireframe */}
+      <Sphere args={[1.15, 32, 32]} position={[0, 0, 0]}>
+        <meshBasicMaterial 
+          wireframe 
+          color="#1e3a8a" 
+          transparent 
+          opacity={0.1} 
+        />
+      </Sphere>
+      
+      {/* World outline points */}
+      <Points ref={pointsRef} positions={worldPoints}>
+        <PointMaterial 
+          size={0.01} 
+          color="#3b82f6" 
+          transparent 
+          opacity={0.8}
+          sizeAttenuation={true}
+        />
+      </Points>
       
       {/* Connection lines */}
-      {lineObjects.map((lineObject, index) => (
-        <primitive key={`line-${index}`} object={lineObject} />
+      {connections.map((line, index) => (
+        <primitive key={`connection-${index}`} object={line} />
       ))}
     </group>
   );
 };
 
-const MobiusStrip = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
+const AdvancedMobius = () => {
+  const mobiusRef = useRef<THREE.Mesh>(null);
   
   const geometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
-    const uSegments = 120;
-    const vSegments = 20;
+    const uSegments = 200;
+    const vSegments = 40;
     const vertices = [];
     const indices = [];
+    const colors = [];
     
     for (let i = 0; i <= uSegments; i++) {
       for (let j = 0; j <= vSegments; j++) {
         const u = (i / uSegments) * Math.PI * 2;
-        const v = ((j / vSegments) - 0.5) * 0.4;
+        const v = ((j / vSegments) - 0.5) * 0.3;
         
-        const x = (2 + v * Math.cos(u / 2)) * Math.cos(u);
-        const y = (2 + v * Math.cos(u / 2)) * Math.sin(u);
-        const z = v * Math.sin(u / 2);
+        // Enhanced Mobius strip with varying width
+        const radius = 2.5 + 0.5 * Math.sin(u * 3);
+        const width = 0.3 + 0.1 * Math.cos(u * 2);
+        
+        const x = (radius + v * width * Math.cos(u / 2)) * Math.cos(u);
+        const y = (radius + v * width * Math.cos(u / 2)) * Math.sin(u);
+        const z = v * width * Math.sin(u / 2) + 0.2 * Math.sin(u * 4);
         
         vertices.push(x, y, z);
+        
+        // Color gradient based on position
+        const hue = (u / (Math.PI * 2) + j / vSegments) * 0.5 + 0.55;
+        const color = new THREE.Color().setHSL(hue, 0.7, 0.5);
+        colors.push(color.r, color.g, color.b);
       }
     }
     
@@ -142,35 +200,73 @@ const MobiusStrip = () => {
     
     geometry.setIndex(indices);
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     geometry.computeVertexNormals();
     
     return geometry;
   }, []);
   
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.05;
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.03;
+    if (mobiusRef.current) {
+      mobiusRef.current.rotation.x = state.clock.elapsedTime * 0.02;
+      mobiusRef.current.rotation.z = state.clock.elapsedTime * 0.03;
+      mobiusRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
     }
   });
 
   return (
-    <mesh ref={meshRef} geometry={geometry} scale={1.2}>
-      <meshBasicMaterial 
-        wireframe 
-        color="#3b82f6" 
+    <mesh ref={mobiusRef} geometry={geometry} scale={0.8} position={[0, 0, 0]}>
+      <meshLambertMaterial 
+        vertexColors
         transparent 
-        opacity={0.3}
+        opacity={0.7}
+        side={THREE.DoubleSide}
+        wireframe={false}
       />
     </mesh>
   );
 };
 
+const FloatingParticles = () => {
+  const particlesRef = useRef<THREE.Points>(null);
+  
+  const particlePositions = useMemo(() => {
+    const positions = [];
+    for (let i = 0; i < 1000; i++) {
+      positions.push(
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20
+      );
+    }
+    return new Float32Array(positions);
+  }, []);
+  
+  useFrame((state) => {
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.01;
+      particlesRef.current.rotation.x = state.clock.elapsedTime * 0.005;
+    }
+  });
+
+  return (
+    <Points ref={particlesRef} positions={particlePositions}>
+      <PointMaterial 
+        size={0.005} 
+        color="#60a5fa" 
+        transparent 
+        opacity={0.6}
+        sizeAttenuation={true}
+      />
+    </Points>
+  );
+};
+
 const ThreeBackground = () => {
   return (
-    <div className="absolute inset-0 z-0 opacity-80">
+    <div className="absolute inset-0 z-0 opacity-90">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: [0, 0, 8], fov: 60 }}
         style={{ background: 'transparent' }}
         gl={{ 
           antialias: true,
@@ -183,16 +279,19 @@ const ThreeBackground = () => {
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.5}
-          maxPolarAngle={Math.PI / 1.3}
-          minPolarAngle={Math.PI / 2.7}
+          autoRotateSpeed={0.3}
+          maxPolarAngle={Math.PI / 1.2}
+          minPolarAngle={Math.PI / 3}
         />
         
-        <NeuralWorldMap />
-        <MobiusStrip />
+        <FloatingParticles />
+        <WorldGlobe />
+        <AdvancedMobius />
         
-        <ambientLight intensity={0.4} color="#f8fafc" />
-        <directionalLight position={[10, 10, 5]} intensity={0.3} color="#3b82f6" />
+        <ambientLight intensity={0.3} color="#f1f5f9" />
+        <directionalLight position={[10, 10, 5]} intensity={0.4} color="#3b82f6" />
+        <pointLight position={[-10, -10, -5]} intensity={0.3} color="#60a5fa" />
+        <spotLight position={[0, 10, 0]} intensity={0.2} color="#dbeafe" />
       </Canvas>
     </div>
   );
