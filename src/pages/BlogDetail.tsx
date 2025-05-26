@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, List, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -8,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 interface BlogPost {
   id: string;
   title: string;
@@ -18,21 +16,22 @@ interface BlogPost {
   category: string;
   slug: string;
 }
-
 interface TableOfContentsItem {
   id: string;
   text: string;
   level: number;
 }
-
 const BlogDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const {
+    slug
+  } = useParams<{
+    slug: string;
+  }>();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string>("");
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>([]);
-  
   const post = blogData.posts.find(p => p.slug === slug);
-  
+
   // Group posts by category
   const groupedPosts = blogData.posts.reduce((acc, post) => {
     if (!acc[post.category]) {
@@ -68,27 +67,22 @@ const BlogDetail = () => {
     <h2 id="conclusion">Conclusion</h2>
     <p>Final thoughts and summary of the key points discussed in this article.</p>
   `;
-
   useEffect(() => {
     // Extract table of contents from content
     const parser = new DOMParser();
     const doc = parser.parseFromString(mockContent, 'text/html');
     const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    
-    const toc: TableOfContentsItem[] = Array.from(headings).map((heading) => ({
+    const toc: TableOfContentsItem[] = Array.from(headings).map(heading => ({
       id: heading.id || heading.textContent?.toLowerCase().replace(/\s+/g, '-') || '',
       text: heading.textContent || '',
       level: parseInt(heading.tagName.charAt(1))
     }));
-    
     setTableOfContents(toc);
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
       const scrollPosition = window.scrollY + 100;
-
       for (let i = headings.length - 1; i >= 0; i--) {
         const heading = headings[i] as HTMLElement;
         if (heading.offsetTop <= scrollPosition) {
@@ -97,21 +91,19 @@ const BlogDetail = () => {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
   if (!post) {
-    return (
-      <div className="min-h-screen bg-white">
+    return <div className="min-h-screen bg-white">
         <Navbar />
         <div className="pt-32 pb-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
@@ -123,12 +115,9 @@ const BlogDetail = () => {
           </div>
         </div>
         <Footer />
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-20">
@@ -136,12 +125,7 @@ const BlogDetail = () => {
           {/* Left Sidebar - Posts List */}
           <div className="w-80 bg-slate-50 border-r border-slate-200 h-screen sticky top-0 overflow-hidden">
             <div className="p-6 border-b border-slate-200">
-              <Button 
-                onClick={() => navigate('/')} 
-                variant="ghost" 
-                size="sm"
-                className="mb-4 -ml-2 font-departure"
-              >
+              <Button onClick={() => navigate('/')} variant="ghost" size="sm" className="mb-4 -ml-2 font-departure">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -152,25 +136,13 @@ const BlogDetail = () => {
               <div className="p-6">
                 <Tabs defaultValue={Object.keys(groupedPosts)[0]} className="w-full">
                   <TabsList className="grid w-full grid-cols-3 mb-6">
-                    {Object.keys(groupedPosts).map((category) => (
-                      <TabsTrigger key={category} value={category} className="text-xs font-departure">
+                    {Object.keys(groupedPosts).map(category => <TabsTrigger key={category} value={category} className="text-xs font-departure">
                         {category}
-                      </TabsTrigger>
-                    ))}
+                      </TabsTrigger>)}
                   </TabsList>
                   
-                  {Object.entries(groupedPosts).map(([category, posts]) => (
-                    <TabsContent key={category} value={category} className="space-y-3">
-                      {posts.map((blogPost) => (
-                        <div
-                          key={blogPost.id}
-                          onClick={() => navigate(`/blog/${blogPost.slug}`)}
-                          className={`p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md ${
-                            blogPost.slug === slug 
-                              ? 'bg-blue-50 border-blue-200' 
-                              : 'bg-white border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
+                  {Object.entries(groupedPosts).map(([category, posts]) => <TabsContent key={category} value={category} className="space-y-3">
+                      {posts.map(blogPost => <div key={blogPost.id} onClick={() => navigate(`/blog/${blogPost.slug}`)} className={`p-4 rounded-lg border cursor-pointer transition-all hover:shadow-md ${blogPost.slug === slug ? 'bg-blue-50 border-blue-200' : 'bg-white border-slate-200 hover:border-slate-300'}`}>
                           <h3 className="font-medium text-slate-900 text-sm mb-2 font-departure line-clamp-2">
                             {blogPost.title}
                           </h3>
@@ -181,19 +153,17 @@ const BlogDetail = () => {
                             <div className="flex items-center gap-1 font-departure">
                               <Calendar className="w-3 h-3" />
                               {new Date(blogPost.publishDate).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric'
-                              })}
+                          month: 'short',
+                          day: 'numeric'
+                        })}
                             </div>
                             <div className="flex items-center gap-1 font-departure">
                               <Clock className="w-3 h-3" />
                               {blogPost.readTime}
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </TabsContent>
-                  ))}
+                        </div>)}
+                    </TabsContent>)}
                 </Tabs>
               </div>
             </ScrollArea>
@@ -224,10 +194,10 @@ const BlogDetail = () => {
                       <div className="flex items-center gap-2 font-departure">
                         <Calendar className="w-4 h-4" />
                         {new Date(post.publishDate).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
                       </div>
                       <div className="flex items-center gap-2 font-departure">
                         <Clock className="w-4 h-4" />
@@ -236,11 +206,10 @@ const BlogDetail = () => {
                     </div>
                   </div>
 
-                  <div className="pt-8 border-t border-slate-200">
-                    <div 
-                      className="prose prose-lg max-w-none prose-headings:font-departure prose-p:font-departure"
-                      dangerouslySetInnerHTML={{ __html: mockContent }}
-                    />
+                  <div className="pt-8 border-t border-slate-800">
+                    <div className="prose prose-lg max-w-none prose-headings:font-departure prose-p:font-departure" dangerouslySetInnerHTML={{
+                    __html: mockContent
+                  }} />
                   </div>
                 </div>
               </div>
@@ -257,20 +226,11 @@ const BlogDetail = () => {
               
               <ScrollArea className="h-full">
                 <nav className="space-y-2">
-                  {tableOfContents.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors font-departure ${
-                        activeSection === item.id
-                          ? 'bg-blue-100 text-blue-700 font-medium'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                      }`}
-                      style={{ paddingLeft: `${(item.level - 1) * 12 + 12}px` }}
-                    >
+                  {tableOfContents.map(item => <button key={item.id} onClick={() => scrollToSection(item.id)} className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors font-departure ${activeSection === item.id ? 'bg-blue-100 text-blue-700 font-medium' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`} style={{
+                  paddingLeft: `${(item.level - 1) * 12 + 12}px`
+                }}>
                       {item.text}
-                    </button>
-                  ))}
+                    </button>)}
                 </nav>
               </ScrollArea>
             </div>
@@ -279,8 +239,6 @@ const BlogDetail = () => {
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BlogDetail;
