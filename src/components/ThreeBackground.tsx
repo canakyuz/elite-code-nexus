@@ -86,9 +86,9 @@ const WorldGlobe = () => {
   });
 
   return (
-    <group ref={globeRef} position={[0, 0, 0]}>
+    <group ref={globeRef}>
       {/* Base globe wireframe */}
-      <Sphere args={[1.15, 32, 32]} position={[0, 0, 0]}>
+      <Sphere args={[1.15, 32, 32]}>
         <meshBasicMaterial 
           wireframe 
           color="#1e3a8a" 
@@ -123,7 +123,7 @@ const SimpleMobius = () => {
   });
 
   return (
-    <mesh ref={mobiusRef} scale={0.8} position={[0, 0, 0]}>
+    <mesh ref={mobiusRef} scale={0.8}>
       <torusGeometry args={[2.5, 0.3, 16, 100]} />
       <meshLambertMaterial 
         color="#60a5fa"
