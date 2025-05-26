@@ -16,33 +16,30 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 backdrop-blur-md border-b border-gray-200' : 'bg-transparent'
+      isScrolled ? 'bg-blue-50/90 backdrop-blur-md border-b border-blue-200' : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-black flex items-center justify-center">
+            <div className="w-8 h-8 bg-blue-600 flex items-center justify-center">
               <span className="text-white font-mono text-sm font-bold">CA</span>
             </div>
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-12">
-            <a href="#about" className="text-gray-600 hover:text-black transition-colors font-mono text-sm uppercase tracking-wider">
+            <a href="#about" className="text-blue-600 hover:text-blue-900 transition-colors font-mono text-sm uppercase tracking-wider">
               About
             </a>
-            <a href="#work" className="text-gray-600 hover:text-black transition-colors font-mono text-sm uppercase tracking-wider">
+            <a href="#work" className="text-blue-600 hover:text-blue-900 transition-colors font-mono text-sm uppercase tracking-wider">
               Work
             </a>
-            <a href="#contact" className="text-gray-600 hover:text-black transition-colors font-mono text-sm uppercase tracking-wider">
+            <a href="#contact" className="text-blue-600 hover:text-blue-900 transition-colors font-mono text-sm uppercase tracking-wider">
               Contact
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-black p-2"
+            className="md:hidden text-blue-900 p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
@@ -53,13 +50,12 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-8 border-t border-gray-200 bg-white">
+          <div className="md:hidden py-8 border-t border-blue-200 bg-blue-50">
             <div className="flex flex-col space-y-6">
-              <a href="#about" className="text-gray-600 font-mono text-sm uppercase tracking-wider">About</a>
-              <a href="#work" className="text-gray-600 font-mono text-sm uppercase tracking-wider">Work</a>
-              <a href="#contact" className="text-gray-600 font-mono text-sm uppercase tracking-wider">Contact</a>
+              <a href="#about" className="text-blue-600 font-mono text-sm uppercase tracking-wider">About</a>
+              <a href="#work" className="text-blue-600 font-mono text-sm uppercase tracking-wider">Work</a>
+              <a href="#contact" className="text-blue-600 font-mono text-sm uppercase tracking-wider">Contact</a>
             </div>
           </div>
         )}
